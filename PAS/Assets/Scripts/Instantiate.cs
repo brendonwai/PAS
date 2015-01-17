@@ -8,7 +8,8 @@ public class Instantiate : MonoBehaviour {
 	private double spawnInterval;
 	private float lastSpawn;
 	public GameObject gameObject1 = null;
-	public GameObject gameObject2 = null;
+
+
 
 	private bool notDone = true;
 
