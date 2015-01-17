@@ -1,45 +1,38 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+
 public struct Question{
 	public int shape;
 	public int color;
 	public int quantity;
-	public double ratio;
+	public double creationRatio;
 }
-public class QuestionGenerator : MonoBehaviour {
+
+public class QuestionGenerator{
 	private static int[] quantities = {0,1};
-	private static int[] colors = {0,1,2,3,4};
-	private static int[] shapes = {0,1,2};
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	private static int[] colors = {0,1,2,3,4,5};
+	private static int[] shapes = {0,1,2,3};
+
 	Question createQuestion(Question question, int shape, int color, int quantity, double ratio){
 		question.shape = shape;
 		question.color = color;
 		question.quantity = quantity;
-		question.ratio = ratio;
+		question.creationRatio = ratio;
 		return question;
 	}
 	// Returns the question and the win parameters, given some number of function parameters based on the difficulty.
-	// The returned tuple is of the form <question, color, shape, side,ratio>.
+	// The returns a question's indexs for a predefined array in the form <question, color, shape, side,ratio>.
 	Question getQuestion(int level) {
 		System.Random r = new System.Random();
-		string randomColor = null; 
-		string randomShape = null;
-		string randomQuantity;
+		int randomColor = 0;
+		int randomShape = 0;
+		int randomQuantity = 0;
 		double ratio = (50+level)/100;		
 		if (level < 4) {
 			randomQuantity = quantities [r.Next (2)];
 			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 		} else if (level < 7) {
-			randomQuantity = "more";
+			randomQuantity = quantities [r.Next (2)];
 			switch (r.Next (2)) {
 			case 0:
 				randomShape = shapes [r.Next (shapes.Length)]; 
@@ -53,7 +46,7 @@ public class QuestionGenerator : MonoBehaviour {
 			randomQuantity = quantities [r.Next (2)];
 			randomShape = shapes [r.Next (shapes.Length)];
 			randomColor = colors [r.Next (colors.Length)]; 
-			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 		}
+		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 	} 
 }
