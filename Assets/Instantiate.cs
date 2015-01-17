@@ -20,7 +20,7 @@ public class Instantiate : MonoBehaviour {
 
 	}
 	void SpawnNew() {
-		gameObject1 = Instantiate(Resources.Load ("Prefabs/Cube"), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+		gameObject1 = Instantiate(Resources.Load ("Prefabs/CubeGreen"), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 		cubeCount--;
 		lastSpawn = Time.time;
 		spawnInterval = Random.Range(5,10)*0.05;
