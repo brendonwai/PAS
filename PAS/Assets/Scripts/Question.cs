@@ -8,9 +8,9 @@ public struct Question{
 	public double ratio;
 }
 public class QuestionGenerator : MonoBehaviour {
-	private string[] quantities = {"more","less"};
-	private string[] colors = {"yellow","red","blue","green","purple"};
-	private string[] shapes = {"circle","square","triangle"};
+	private static string[] quantities = {"more","less"};
+	private static string[] colors = {"yellow","red","blue","green","purple"};
+	private static string[] shapes = {"circle","square","triangle"};
 	// Use this for initialization
 	void Start () {
 	
@@ -35,23 +35,25 @@ public class QuestionGenerator : MonoBehaviour {
 		string randomShape = null;
 		string randomQuantity;
 		double ratio = (50+level)/100;		
-		if(level < 4) {
-			randomQuantity = quantities[r.Next (2)];
-			return createQuestion(new Question(), randomShape, randomColor, randomQuantity, ratio);
-		} else if(level < 7) {
+		if (level < 4) {
+			randomQuantity = quantities [r.Next (2)];
+			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
+		} else if (level < 7) {
 			randomQuantity = "more";
-			switch(r.Next(2)) {
-				case 0: randomShape = shapes[r.Next (shapes.Length)]; 
-					return createQuestion(new Question(), randomShape, randomColor, randomQuantity, ratio);
-			    case 1: randomColor = colors[r.Next (colors.Length)]; 
-					return createQuestion(new Question(), randomShape, randomColor, randomQuantity, ratio);
+			switch (r.Next (2)) {
+			case 0:
+				randomShape = shapes [r.Next (shapes.Length)]; 
+				return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
+			case 1:
+				randomColor = colors [r.Next (colors.Length)]; 
+				return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 
 			}
 		} else {
-			randomQuantity = quantities[r.Next (2)];
-			randomShape = shapes[r.Next (shapes.Length)];
-			randomColor = colors[r.Next (colors.Length)]; 
+			randomQuantity = quantities [r.Next (2)];
+			randomShape = shapes [r.Next (shapes.Length)];
+			randomColor = colors [r.Next (colors.Length)]; 
+			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 		}
-		return createQuestion(new Question(), randomShape, randomColor, randomQuantity, ratio);
 	} 
 }
