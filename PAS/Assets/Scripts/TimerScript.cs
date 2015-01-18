@@ -4,9 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class TimerScript : MonoBehaviour {
-	
-	string text;
-	Text TimerText;
+
+	public Text TimerText;
 	float time;
 	int startCount = 5;
 	public int count;
@@ -33,22 +32,20 @@ public class TimerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log (count);
-		if (Time.time - time > 1){
-			count -= 1;
-			time = Time.time;
-			if (count > 0){
-				TimerText.text = "Pick a Side!\n" + count.ToString ();
-			}
-			else{
-				text = "";
-				if (count < -2){
-					started = false;
+		if (started == true) {
+						if (Time.time - time > 1) {
+								count -= 1;
+								time = Time.time;
+								if (count > 0) {
+										TimerText.text = "Pick a Side!\n" + count.ToString ();
+								} else {
+										TimerText.text = "";
+										started = false;
+								}
+						}
+				} else {
+			TimerText.text = "";
 				}
-			}
-		}
-	}
-	
-	void Do(){
-		//Do whatever happens when timer goes to zero
-	}
+
+				}
 }

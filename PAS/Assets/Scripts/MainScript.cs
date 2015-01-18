@@ -33,6 +33,7 @@ public class MainScript : MonoBehaviour {
 		lvl = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
+		q.text = "";
 		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		time = timersc.count;;
 		level = 1;
