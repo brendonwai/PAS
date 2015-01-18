@@ -27,27 +27,27 @@ public class PASColor : MonoBehaviour {
 
 		if (color == ShapeColor.Red)
 		{
-			renderer.color = Color.red;
+			renderer.color = new Color(210f/255f,83f/255f,65f/255f,1f);
 		}
 
 		else if (color == ShapeColor.Green)
 		{
-			renderer.color = Color.green;
+			renderer.color = new Color(140f/255f,235f/255f,148f/255f,1f);;
 		}
 
 		else if (color == ShapeColor.Blue)
 		{
-			renderer.color = Color.blue;
+			renderer.color = new Color(140f/255f,190f/255f,1f,1f);;
 		}
 
 		else if (color == ShapeColor.Yellow)
 		{
-			renderer.color = Color.yellow;
+			renderer.color = new Color(231f/255f,219f/255f,41f/255f,1f);;
 		}
 
 		else if (color == ShapeColor.Purple)
 		{
-			renderer.color = new Color(255f/51f, 0, 255f/102f);
+			renderer.color = new Color(148f/255f,93f/255f,181f/255f,1f);
 		}
 	}
 }
