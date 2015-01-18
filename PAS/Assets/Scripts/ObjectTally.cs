@@ -25,7 +25,7 @@ public class ObjectTally : MonoBehaviour {
 		LeftPool=new List<string[]>();
 		RightPool=new List<string[]>();
 		/*
-		Load (.3, "Red", "Circle");
+		Load (.3, "Purple", "Circle");
 		List<string[]> st = getObjectRow ();
 		foreach(string[] s in st){
 			Debug.Log("s1: "+s[0]+"s2: "+s[1]);
@@ -82,7 +82,6 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	void ListAppender(int choice,int requiredAmount){
-		Debug.Log (choice);
 		if (choice==1){
 			if(requiredColor!=null && requiredShape!=null){
 				for(int i=0;i<requiredAmount;i++){
