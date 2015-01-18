@@ -194,11 +194,7 @@ public class MainScript : MonoBehaviour {
 			}
 		}
 		else {
-			if (lives == 1)
-				GameOver ();
-			else 
-				lives--;
-			time = 0;
+			GameOver ();
 		}
 	}
 	
