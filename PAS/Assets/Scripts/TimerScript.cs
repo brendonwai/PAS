@@ -8,21 +8,24 @@ public class TimerScript : MonoBehaviour {
 	string text;
 	Text TimerText;
 	float time;
-	public int startCount = 5;
+	int startCount = 5;
 	public int count;
 	bool started;
 	
 	// Use this for initialization
 	void Start(){
 		startCount = 5;
+		count = -5;
 		started = false;
+		TimerText = GetComponent<Text> ();
 	}
 	
 	public void StartTimer () {
 		if (started != true) {
 			started = true;
+			startCount = 5;
+			Debug.Log (startCount);
 			count = startCount;
-			TimerText = GetComponent<Text> ();
 			TimerText.text = "Pick a Side!\n" + count.ToString ();
 			time = Time.time;
 		}
@@ -30,11 +33,12 @@ public class TimerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (count);
 		if (Time.time - time > 1){
 			count -= 1;
 			time = Time.time;
 			if (count > 0){
-				text = count.ToString ();
+				TimerText.text = "Pick a Side!\n" + count.ToString ();
 			}
 			else{
 				text = "";
@@ -43,7 +47,6 @@ public class TimerScript : MonoBehaviour {
 					Debug.Log (started);
 				}
 			}
-			TimerText.text = "Pick a Side!\n" + text;
 		}
 	}
 	
