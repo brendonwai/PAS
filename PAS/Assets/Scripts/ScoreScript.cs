@@ -7,7 +7,7 @@ public class ScoreScript : MonoBehaviour {
 
 	MainScript mainobj;
 	string defaulttext = "Level: ";
-	Text ScoreText;
+	public Text ScoreText;
 	int level;
 
 	//call this when you level up/score up

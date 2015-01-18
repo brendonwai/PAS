@@ -20,10 +20,12 @@ public class MainScript : MonoBehaviour {
 	float timer0;
 	bool falling;
 	bool choosing;
+	Instantiate generator;
 	
 	// Use this for initialization
 	void Start () {
 		choice = -1;
+		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
 		lite = GameObject.Find ("Directional light").GetComponent<Light>();
@@ -68,6 +70,7 @@ public class MainScript : MonoBehaviour {
 		q.text = "";
 		choosing = false;
 		timersc.started = false;
+		generator.clearShapes ();
 	}
 	
 	// Update is called once per frame
@@ -117,6 +120,7 @@ public class MainScript : MonoBehaviour {
 			LB.changestate ();
 			RB.changestate ();
 				}
+		score.ScoreText.text = "";
 		q.text = lvlquestion;
 		timersc.StartTimer ();
 		time = timersc.count;
