@@ -37,7 +37,17 @@ public class PASColor : MonoBehaviour {
 		{
 			renderer.color = Color.blue;
 		}
+
+		else if (color == ShapeColor.Yellow)
+		{
+			renderer.color = Color.yellow;
+		}
+
+		else if (color == ShapeColor.Purple)
+		{
+			renderer.color = new Color(255f/51f, 0, 255f/102f);
+		}
 	}
 }
 
-public enum ShapeColor {Red,Green,Blue,BLANK};
+public enum ShapeColor {Red,Green,Blue,Yellow, Purple,BLANK};
