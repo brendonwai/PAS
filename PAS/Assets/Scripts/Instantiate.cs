@@ -73,25 +73,25 @@ public class Instantiate : MonoBehaviour {
 			for (int i = 0; i < 8; i++)
 			{
 
-			//column 1
-			GameObject shapeType = null;
-			ShapeColor shapeColor = ShapeColor.BLANK;
+				GameObject shapeType = null;
+				ShapeColor shapeColor = ShapeColor.BLANK;
 
-			if(row1[i,0]=="Circle")
-				shapeType = Circle;
-			if(row1[i,0]=="Square")
-				shapeType = Square;
-			if(row1[i,0]=="Triangle")
-				shapeType = Triangle;
-			if(row1[i,1]=="Red")
-				shapeColor = ShapeColor.Red;
-			if(row1[i,1]=="Green")
-				shapeColor = ShapeColor.Green;
-			if(row1[i,1]=="Blue")
-				shapeColor = ShapeColor.Blue;
+				if(row1[i,0]=="Circle")
+					shapeType = Circle;
+				if(row1[i,0]=="Square")
+					shapeType = Square;
+				if(row1[i,0]=="Triangle")
+					shapeType = Triangle;
+				if(row1[i,1]=="Red")
+					shapeColor = ShapeColor.Red;
+				if(row1[i,1]=="Green")
+					shapeColor = ShapeColor.Green;
+				if(row1[i,1]=="Blue")
+					shapeColor = ShapeColor.Blue;
 
-			gameObject = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
-			//gameObject.GetComponent<PASColor>().setColor(shapeColor);
+				gameObject = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
+				PASColor colorSetter = gameObject.GetComponent<PASColor>();
+				colorSetter.setColor(shapeColor);
 			}
 
 			
