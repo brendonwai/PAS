@@ -13,7 +13,7 @@ public class ShootingStar : MonoBehaviour {
 		shootingStar.rigidbody.AddForce (Vector3.right * 400);
 	}
 	void Update() {
-		shootingStar.rigidbody2D.velocity = new Vector2 (1, 2).normalized*5;
+		shootingStar.rigidbody2D.velocity = new Vector2 (1, 0).normalized*5;
 		//float argument = Time.realtimeSinceStartup * 100;
 		//shootingStar.rigidbody.AddForce(Vector3.up * (Mathf.Sin (argument) * 500 - (2*lastForce)));
 		//lastForce = Mathf.Sin (argument) * 500;
