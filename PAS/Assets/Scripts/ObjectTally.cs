@@ -161,7 +161,9 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	string PickColor(){
-	//	Debug.Log ("LOL");
+		if(colorNum==1){
+			return colorPool[0];
+		}
 		int poolCount = 0;
 		int needed = 1;
 		string colorselected = "NULL";
@@ -175,7 +177,9 @@ public class ObjectTally : MonoBehaviour {
 		return colorselected;
 	}
 	string PickShape(){
-		//	Debug.Log ("LOL");
+		if(shapeNum==1){
+			return shapePool[0];
+		}
 		int poolCount = 0;
 		int needed = 1;
 		string shapeselected = "NULL";
