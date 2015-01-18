@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 public class ShootingStar : MonoBehaviour {
 	public float xSpeed, ySpeed, amplitude;
+	public GameObject shootingStar;
 	private Vector3 currentPosition;
 	void Start() {
-		GameObject star = new GameObject ("ShootingStar");
+		//GameObject star = new GameObject ("ShootingStar");
 		
-		Instantiate (star);
+		shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
+		shootingStar.rigidbody.AddForce (Vector3.right * 400);
 	}
-	void FixedUpdate() {
-		currentPosition.x += xSpeed;
-		currentPosition.y += Mathf.Sin (Time.realtimeSinceStartup * ySpeed) * amplitude;
-		transform.position = currentPosition;
+	void Update() {
+		shootingStar.rigidbody.AddForce(Vector3.up * Mathf.Sin (Time.realtimeSinceStartup*500) * 100);
 	}
 }

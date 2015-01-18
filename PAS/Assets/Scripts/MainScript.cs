@@ -22,6 +22,8 @@ public class MainScript : MonoBehaviour {
 	bool choosing;
 	Instantiate generator;
 	bool more;
+	bool wonnered;
+	public float lookTime;
 	
 	// Use this for initialization
 	void Start () {
@@ -37,7 +39,7 @@ public class MainScript : MonoBehaviour {
 		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		time = timersc.count;;
 		level = 1;
-		//		lives = 3;
+		lives = 3;
 		//livestext.text = "";//lives.ToString ();
 		state = 0;
 		
@@ -66,7 +68,9 @@ public class MainScript : MonoBehaviour {
 	void nextLevel(){
 		level += 1;
 		lvl.uplvl ();
-		lvl.upscore (5);
+		if (wonnered == true) {
+			lvl.upscore (5);
+		}
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -117,7 +121,7 @@ public class MainScript : MonoBehaviour {
 			falling = true;
 			timer0 = Time.time;
 		}
-		if (Time.time - timer0 > 3){
+		if (Time.time - timer0 > lookTime){
 			falling = false;
 			state = 2;
 		}
@@ -143,7 +147,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 0)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -151,7 +158,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 				}
@@ -161,7 +171,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -169,7 +182,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 				}
