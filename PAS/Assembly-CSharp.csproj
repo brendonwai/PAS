@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\MainScript.cs" />
      <Compile Include="Assets\Scripts\ObjectTally.cs" />
      <Compile Include="Assets\Scripts\PASColor.cs" />
+     <Compile Include="Assets\Scripts\Play.cs" />
      <Compile Include="Assets\Scripts\Question.cs" />
      <Compile Include="Assets\Scripts\ScoreScript.cs" />
      <Compile Include="Assets\Scripts\TimerScript.cs" />
