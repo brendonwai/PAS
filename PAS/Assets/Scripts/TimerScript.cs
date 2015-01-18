@@ -36,7 +36,7 @@ public class TimerScript : MonoBehaviour {
 						if (Time.time - time > 1) {
 								count -= 1;
 								time = Time.time;
-								if (count > 0) {
+								if (count > -1) {
 										TimerText.text = "Pick a Side!\n" + count.ToString ();
 								} else {
 										TimerText.text = "";
