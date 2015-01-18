@@ -10,8 +10,8 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=5;
-	private int shapeNum=3;
+	private int colorNum=1;
+	private int shapeNum=2;
 	private List<string> shapePool=new List<string>();
 	private List<string> colorPool =new List<string>();
 	private double spawnRatio;
@@ -63,7 +63,7 @@ public class ObjectTally : MonoBehaviour {
 	
 		
 
-	List<string[]> getObjectRow(){
+	public List<string[]> getObjectRow(){
 		ListRow = new List<string[]> ();
 		if(LeftPool.Count==0 || RightPool.Count==0){
 			return null;

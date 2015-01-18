@@ -29,8 +29,10 @@ public class Instantiate : MonoBehaviour {
 	private int spawnRound;
 	private GameObject[] spawnPoints;
 
+	private ObjectTally tally;
 
 	//Imitate row this script will get from tally or whatever
+	/*
 	private string[] col1 = {"Circle", "Red"};
 	private string[] col2 = {"Circle", "Red"};
 	private string[] col3 = {"Square", "Red"};
@@ -38,9 +40,9 @@ public class Instantiate : MonoBehaviour {
 	private string[] col5 = {"Circle", "Red"};
 	private string[] col6 = {"Square", "Blue"};
 	private string[] col7 = {"Circle", "Red"};
-	private string[] col8 = {"Circle", "Blue"};
-	string[,] row1 = new string[8,2] {{"Circle", "Red"}, {"Circle", "Red"}, {"Square", "Red"}, {"Circle", "Blue"}, {"Circle", "Red"}, {"Square", "Blue"}, {"Circle", "Red"}, {"Circle", "Blue"}};
-
+	private string[] col8 = {"Circle", "Purple"};
+	string[,] row1 = new string[8,2] {{"Circle", "Red"}, {"Circle", "Red"}, {"Square", "Yellow"}, {"Circle", "Blue"}, {"Circle", "Red"}, {"Square", "Green"}, {"Circle", "Red"}, {"Circle", "Purple"}};
+	*/
 	//
 
 	private bool notDone = true;
@@ -50,6 +52,8 @@ public class Instantiate : MonoBehaviour {
 	void Start () 
 	{
 		spawnPoints = new GameObject[]{spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5, spawnPoint6, spawnPoint7, spawnPoint8};
+
+		tally = GameObject.FindGameObjectWithTag("Tally").GetComponent<ObjectTally>();
 
 		spawnRound = cubeCount;
 		SpawnNew ();
@@ -69,6 +73,7 @@ public class Instantiate : MonoBehaviour {
 			//row1[0,1] bottom left object's color
 			//row1[1,0] right of the top object
 
+			List<string[]> row = tally.getObjectRow();
 
 			for (int i = 0; i < 8; i++)
 			{
@@ -76,18 +81,22 @@ public class Instantiate : MonoBehaviour {
 				GameObject shapeType = null;
 				ShapeColor shapeColor = ShapeColor.BLANK;
 
-				if(row1[i,0]=="Circle")
+				if(row[i][0]=="circle")
 					shapeType = Circle;
-				if(row1[i,0]=="Square")
+				if(row[i][0]=="square")
 					shapeType = Square;
-				if(row1[i,0]=="Triangle")
+				if(row[i][0]=="triangle")
 					shapeType = Triangle;
-				if(row1[i,1]=="Red")
+				if(row[i][1]=="red")
 					shapeColor = ShapeColor.Red;
-				if(row1[i,1]=="Green")
+				if(row[i][1]=="green")
 					shapeColor = ShapeColor.Green;
-				if(row1[i,1]=="Blue")
+				if(row[i][1]=="blue")
 					shapeColor = ShapeColor.Blue;
+				if(row[i][1]=="yellow")
+					shapeColor = ShapeColor.Yellow;
+				if(row[i][1]=="purple")
+					shapeColor = ShapeColor.Purple;
 
 				gameObject = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
 				PASColor colorSetter = gameObject.GetComponent<PASColor>();
