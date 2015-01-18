@@ -5,7 +5,7 @@ public class PASColor : MonoBehaviour {
 
 	public ShapeColor color;
 
-	SpriteRenderer renderer;
+	public SpriteRenderer renderer;
 
 	// Use this for initialization
 	void Start () 

@@ -41,19 +41,15 @@ public class Instantiate : MonoBehaviour {
 	private string[] col8 = {"Circle", "Blue"};
 	string[,] row1 = new string[8,2] {{"Circle", "Red"}, {"Circle", "Red"}, {"Square", "Red"}, {"Circle", "Blue"}, {"Circle", "Red"}, {"Square", "Blue"}, {"Circle", "Red"}, {"Circle", "Blue"}};
 
-
-
 	//
 
-
 	private bool notDone = true;
-
 
 	private float time;
 	// Use this for initialization
 	void Start () 
 	{
-		spawnPoints = {spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5, spawnPoint6, spawnPoint7, spawnPoint8};
+		spawnPoints = new GameObject[]{spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5, spawnPoint6, spawnPoint7, spawnPoint8};
 
 		spawnRound = cubeCount;
 		SpawnNew ();
@@ -74,30 +70,33 @@ public class Instantiate : MonoBehaviour {
 			//row1[1,0] right of the top object
 
 
-			//column 1
-			GameObject shapeType;
-			ShapeColor shapeColor;
-			GameObject[] spawnPoints;
+			for (int i = 0; i < 8; i++)
+			{
 
-			if(row1[0,0]=="Circle")
+			//column 1
+			GameObject shapeType = null;
+			ShapeColor shapeColor = ShapeColor.BLANK;
+
+			if(row1[i,0]=="Circle")
 				shapeType = Circle;
-			if(row1[0,0]=="Square")
+			if(row1[i,0]=="Square")
 				shapeType = Square;
-			if(row1[0,0]=="Triangle")
+			if(row1[i,0]=="Triangle")
 				shapeType = Triangle;
-			if(row1[0,1]=="Red")
+			if(row1[i,1]=="Red")
 				shapeColor = ShapeColor.Red;
-			if(row1[0,1]=="Green")
+			if(row1[i,1]=="Green")
 				shapeColor = ShapeColor.Green;
-			if(row1[0,1]=="Blue")
+			if(row1[i,1]=="Blue")
 				shapeColor = ShapeColor.Blue;
 
-			gameObject = Instantiate(shapeType, spawnPoint1.transform.position, Quaternion.identity) as GameObject;
-			gameObject.GetComponent<PASColor>().setColor(shapeColor);
+			gameObject = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
+			//gameObject.GetComponent<PASColor>().setColor(shapeColor);
+			}
 
 			
 			
-			// column 2
+			/*// column 2
 			if(row1[1,0]=="Circle")
 			{gameObject = Instantiate(Circle, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
 			if(row1[1,0]=="Square")
@@ -146,7 +145,7 @@ public class Instantiate : MonoBehaviour {
 			if(row1[7,0]=="Square")
 			{gameObject = Instantiate(Square, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}
 			if(row1[7,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}
+			{gameObject = Instantiate(Triangle, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}*/
 
 			
 
@@ -177,6 +176,9 @@ public class Instantiate : MonoBehaviour {
 			{
 				SpawnNew ();
 				spawnRound--;
+
+				Debug.Log(spawnRound);
+
 			}
 		}
 
