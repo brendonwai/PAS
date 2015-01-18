@@ -37,7 +37,7 @@ public class MainScript : MonoBehaviour {
 		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		time = timersc.count;;
 		level = 1;
-		//		lives = 3;
+		lives = 3;
 		//livestext.text = "";//lives.ToString ();
 		state = 0;
 		
@@ -143,7 +143,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 0)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -151,7 +154,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 				}
@@ -161,7 +167,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -169,7 +178,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-							GameOver ();
+							if (lives == 1)
+								GameOver ();
+							else 
+								lives--;
 						}
 					}
 				}
@@ -178,7 +190,11 @@ public class MainScript : MonoBehaviour {
 			}
 		}
 		else {
-			GameOver ();
+			if (lives == 1)
+				GameOver ();
+			else 
+				lives--;
+			time = 0;
 		}
 	}
 	
