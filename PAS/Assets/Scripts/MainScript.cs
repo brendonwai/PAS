@@ -143,10 +143,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-					//		if (lives == 0)
+							if (lives == 0)
 								GameOver ();
-					//		else 
-					//			lives--;
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -154,10 +154,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-					//		if (lives == 1)
+							if (lives == 1)
 								GameOver();
-					//		else 
-					//			lives--;
+							else 
+								lives--;
 						}
 					}
 				}
@@ -167,10 +167,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-						//	if (lives == 1)
+							if (lives == 1)
 								GameOver ();
-						//	else 
-						//		lives--;
+							else 
+								lives--;
 						}
 					}
 					else{
@@ -178,11 +178,10 @@ public class MainScript : MonoBehaviour {
 							nextLevel ();
 						}
 						else{
-						//	if (lives == 1)
+							if (lives == 1)
 								GameOver ();
-						//	else 
-						//		lives--;
-
+							else 
+								lives--;
 						}
 					}
 				}
@@ -191,11 +190,12 @@ public class MainScript : MonoBehaviour {
 			}
 		}
 		else {
-		//	if (lives == 1)
-			GameOver ();
-		//	else 
-	 	//	lives--;
-		//	time = 0;
+			if (lives == 1)
+				GameOver ();
+			else{
+	 			lives--;
+				timersc.count = 6;
+			}
 		}
 	}
 	
