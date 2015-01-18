@@ -12,7 +12,7 @@ public class PASColor : MonoBehaviour {
 	{
 		renderer = GetComponent<SpriteRenderer>();
 
-		setColor(color);
+		//setColor(color);
 	}
 	
 	// Update is called once per frame
@@ -23,6 +23,8 @@ public class PASColor : MonoBehaviour {
 
 	public void setColor(ShapeColor color)
 	{
+		renderer = GetComponent<SpriteRenderer>();
+
 		if (color == ShapeColor.Red)
 		{
 			renderer.color = Color.red;

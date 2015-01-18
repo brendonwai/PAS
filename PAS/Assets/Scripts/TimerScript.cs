@@ -10,7 +10,7 @@ public class TimerScript : MonoBehaviour {
 	float time;
 	int startCount = 5;
 	public int count;
-	bool started;
+	public bool started;
 	
 	// Use this for initialization
 	void Start(){
@@ -24,7 +24,6 @@ public class TimerScript : MonoBehaviour {
 		if (started != true) {
 			started = true;
 			startCount = 5;
-			Debug.Log (startCount);
 			count = startCount;
 			TimerText.text = "Pick a Side!\n" + count.ToString ();
 			time = Time.time;
@@ -44,7 +43,6 @@ public class TimerScript : MonoBehaviour {
 				text = "";
 				if (count < -2){
 					started = false;
-					Debug.Log (started);
 				}
 			}
 		}

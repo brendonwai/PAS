@@ -17,6 +17,9 @@ public class MainScript : MonoBehaviour {
 	DisableButton LB;
 	DisableButton RB;
 	public GameObject tally;
+	float timer0;
+	bool falling;
+	bool choosing;
 	
 	// Use this for initialization
 	void Start () {
@@ -55,6 +58,17 @@ public class MainScript : MonoBehaviour {
 	public void RightButton(){
 		choice =  1;
 	}
+
+	void nextLevel(){
+		level += 1;
+		score.up ();
+		state = 0;
+		LB.changestate ();
+		RB.changestate ();
+		q.text = "";
+		choosing = false;
+		timersc.started = false;
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -85,14 +99,24 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void displayBlockFall(){
+		if (falling == false) {
+			falling = true;
+			timer0 = Time.time;
+		}
+		if (Time.time - timer0 > 3){
+			falling = false;
+			state = 2;
+		}
 		//litLite ();
-		dimLite ();
-		state = 2;
+		//dimLite ();
 	}
 	
 	void guess(){
-		//fLB.changestate ();
-		//RB.changestate ();
+		if (choosing == false) {
+			choosing = true;
+			LB.changestate ();
+			RB.changestate ();
+				}
 		q.text = lvlquestion;
 		timersc.StartTimer ();
 		time = timersc.count;
@@ -100,8 +124,7 @@ public class MainScript : MonoBehaviour {
 			if (choice > -1){
 				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
 					if (choice == 0){
-						level += 1;
-						score.up ();
+						nextLevel ();
 					}
 					else{
 						GameOver ();
@@ -109,8 +132,7 @@ public class MainScript : MonoBehaviour {
 				}
 				else{
 					if (choice == 1){
-						level += 1;
-						score.up ();
+						nextLevel ();
 					}
 					else{
 						GameOver ();
@@ -123,7 +145,6 @@ public class MainScript : MonoBehaviour {
 		else {
 			GameOver ();
 		}
-		state = 0;
 	}
 	
 	void GameOver(){
