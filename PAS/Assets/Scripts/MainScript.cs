@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainScript : MonoBehaviour {
 	QuestionGenerator QG = new QuestionGenerator();
-	ScoreScript score;
+	ScoreScript lvl;
 	public int level;
 	public int lives;
 	TimerScript timersc;
@@ -21,6 +21,7 @@ public class MainScript : MonoBehaviour {
 	bool falling;
 	bool choosing;
 	Instantiate generator;
+	bool more;
 	
 	// Use this for initialization
 	void Start () {
@@ -29,7 +30,7 @@ public class MainScript : MonoBehaviour {
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
 		lite = GameObject.Find ("Directional light").GetComponent<Light>();
-		score = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
+		lvl = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
@@ -63,7 +64,7 @@ public class MainScript : MonoBehaviour {
 
 	void nextLevel(){
 		level += 1;
-		score.up ();
+		lvl.up ();
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -88,6 +89,14 @@ public class MainScript : MonoBehaviour {
 	
 	void question(){
 		Question newQuestion = QG.getQuestion(10);
+		if (newQuestion.quantity == "more") {
+			more = true;
+		} 
+		else {
+			more = false;
+		}
+
+
 		if (newQuestion.color == null && newQuestion.shape == null)
 			lvlquestion = "Which side has " + newQuestion.quantity + " objects?";
 		else if (newQuestion.color == null && newQuestion.shape != null) 
@@ -120,13 +129,13 @@ public class MainScript : MonoBehaviour {
 			LB.changestate ();
 			RB.changestate ();
 				}
-		score.ScoreText.text = "";
+		lvl.lvlText.text = "";
 		q.text = lvlquestion;
 		timersc.StartTimer ();
 		time = timersc.count;
 		if (time > 0) {
 			if (choice > -1){
-				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
+				if ( tally.GetComponent<ObjectTally>().LeftMore== true && more == true){
 					if (choice == 0){
 						nextLevel ();
 					}
