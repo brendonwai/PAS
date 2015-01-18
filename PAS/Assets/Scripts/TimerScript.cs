@@ -40,7 +40,6 @@ public class TimerScript : MonoBehaviour {
 				text = "";
 				if (count < -2){
 					started = false;
-					Debug.Log (started);
 				}
 			}
 			TimerText.text = "Pick a Side!\n" + text;

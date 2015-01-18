@@ -9,16 +9,18 @@ public class MainScript : MonoBehaviour {
 	public int lives;
 	TimerScript timersc;
 	int time;
-	Light light;
+	Light lite;
 	int state;
 	int choice;
-	Text livestext;
+	Text q;
+	string lvlquestion;
 	
 	// Use this for initialization
 	void Start () {
-		light = GameObject.Find ("Directional light").GetComponent<Light>();
+		lite = GameObject.Find ("Directional light").GetComponent<Light>();
 		score = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
+		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		time = timersc.count;;
 		level = 1;
@@ -28,14 +30,14 @@ public class MainScript : MonoBehaviour {
 		
 	}
 	
-	void dimLight(){
-		if (light.intensity < 5) {
-			light.intensity += 0.1f;
+	void dimLite(){
+		if (lite.intensity < 8) {
+			lite.intensity += 0.25f;
 		}
 	}
 	
-	void litLight(){
-		if (light.intensity > 0.5) {
+	void litLite(){
+		if (lite.intensity > 0.5) {
 			light.intensity -= 0.25f;
 		}
 	}
@@ -62,31 +64,31 @@ public class MainScript : MonoBehaviour {
 	}	
 	
 	void question(){
-		Question newQuestion = QG.getQuestion(1);
-		string question;
+		Question newQuestion = QG.getQuestion(level);
 		if (newQuestion.color == null && newQuestion.shape == null)
-			question = "Which side has " + newQuestion.quantity + " objects?";
+			lvlquestion = "Which side has " + newQuestion.quantity + " objects?";
 		else if (newQuestion.color == null && newQuestion.shape != null) 
-			question = "Which side has " + newQuestion.quantity + " " + newQuestion.shape + "s?";
+			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.shape + "s?";
 		else if (newQuestion.shape == null && newQuestion.color != null)
-			question = "Which side has " + newQuestion.quantity + " " + newQuestion.color + "s?";
+			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + "s?";
 		else 
-			question = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
+			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
 		state = 1;
 	}
 	
 	void displayBlockFall(){
-		//litLight ();
-		dimLight ();
+		//litLite ();
+		dimLite ();
 		state = 2;
 	}
 	
 	void guess(){
+		q.text = lvlquestion;
 		timersc.StartTimer ();
-		Debug.Log ("dolan");
 		time = timersc.count;
 		if (time > 0) {
 			if (choice > -1){
+				level += 1;
 				score.up ();
 				//choice is passed here
 			}
