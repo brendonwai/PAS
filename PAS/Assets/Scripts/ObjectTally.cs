@@ -10,13 +10,13 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=3;
+	private int colorNum=5;
 	private int shapeNum=3;
-	private List<string> shapePool;
-	private List<string> colorPool;
+	private List<string> shapePool=new List<string>();
+	private List<string> colorPool =new List<string>();
 	private double spawnRatio;
-	private List<string[]> LeftPool;
-	private List<string[]> RightPool;
+	private List<string[]> LeftPool=new List<string[]>();
+	private List<string[]> RightPool=new List<string[]>();
 	private List<string[]> ListRow;
 
 	void Start(){
@@ -33,7 +33,7 @@ public class ObjectTally : MonoBehaviour {
 		*/
 	}
 
-	void Load(double ratio,string color=null,string shape=null){
+	public void Load(double ratio,string color=null,string shape=null){
 		spawnRatio = ratio;
 		if(color!=null){
 			requiredColor = color;
@@ -166,6 +166,7 @@ public class ObjectTally : MonoBehaviour {
 		int needed = 1;
 		string colorselected = "NULL";
 		while (poolCount < needed) {
+			Debug.Log (possibleColors);
 			colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
