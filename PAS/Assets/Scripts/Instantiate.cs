@@ -25,9 +25,12 @@ public class Instantiate : MonoBehaviour {
 	private float lastSpawn;
 	private GameObject gameObject;
 	public GameObject rowGetter;
+	public float rate;
+	private int spawnRound;
+	private GameObject[] spawnPoints;
 
 
-	//Imitate row this gets from tally whatever
+	//Imitate row this script will get from tally or whatever
 	private string[] col1 = {"Circle", "Red"};
 	private string[] col2 = {"Circle", "Red"};
 	private string[] col3 = {"Square", "Red"};
@@ -50,6 +53,9 @@ public class Instantiate : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		spawnPoints = {spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5, spawnPoint6, spawnPoint7, spawnPoint8};
+
+		spawnRound = cubeCount;
 		SpawnNew ();
 
 	}
@@ -59,18 +65,39 @@ public class Instantiate : MonoBehaviour {
 		//in the row on the left, rest is for the right
 
 
-		for(int i=0; i<cubeCount; i++)
+		if(spawnRound>1)
 		{
 			//Get a fresh row from object tally here
 
-		
-			if(row1[0,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint1.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[0,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint1.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[0,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint1.transform.position, Quaternion.identity) as GameObject;}
+			//row1[0,0] bottom left object's shape
+			//row1[0,1] bottom left object's color
+			//row1[1,0] right of the top object
 
+
+			//column 1
+			GameObject shapeType;
+			ShapeColor shapeColor;
+			GameObject[] spawnPoints;
+
+			if(row1[0,0]=="Circle")
+				shapeType = Circle;
+			if(row1[0,0]=="Square")
+				shapeType = Square;
+			if(row1[0,0]=="Triangle")
+				shapeType = Triangle;
+			if(row1[0,1]=="Red")
+				shapeColor = ShapeColor.Red;
+			if(row1[0,1]=="Green")
+				shapeColor = ShapeColor.Green;
+			if(row1[0,1]=="Blue")
+				shapeColor = ShapeColor.Blue;
+
+			gameObject = Instantiate(shapeType, spawnPoint1.transform.position, Quaternion.identity) as GameObject;
+			gameObject.GetComponent<PASColor>().setColor(shapeColor);
+
+			
+			
+			// column 2
 			if(row1[1,0]=="Circle")
 			{gameObject = Instantiate(Circle, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
 			if(row1[1,0]=="Square")
@@ -78,6 +105,7 @@ public class Instantiate : MonoBehaviour {
 			if(row1[1,0]=="Triangle")
 			{gameObject = Instantiate(Triangle, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
 
+			// column 3 
 			if(row1[2,0]=="Circle")
 			{gameObject = Instantiate(Circle, spawnPoint3.transform.position, Quaternion.identity) as GameObject;}
 			if(row1[2,0]=="Square")
@@ -132,10 +160,8 @@ public class Instantiate : MonoBehaviour {
 //		gameObject = Instantiate(Square, spawnPoint7.transform.position, Quaternion.identity) as GameObject;
 //		gameObject = Instantiate(Square, spawnPoint8.transform.position, Quaternion.identity) as GameObject;//
 
-		
-		cubeCount--;
 		lastSpawn = Time.time;
-		spawnInterval = Random.Range(5,10)*0.02;
+		spawnInterval = Random.Range(5,10)*rate;
 		}
 	}
 	// Update is called once per frame
@@ -150,6 +176,7 @@ public class Instantiate : MonoBehaviour {
 			if(Time.time > (lastSpawn + spawnInterval))
 			{
 				SpawnNew ();
+				spawnRound--;
 			}
 		}
 
