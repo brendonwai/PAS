@@ -10,8 +10,8 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=5;
-	private int shapeNum=3;
+	private int colorNum=2;
+	private int shapeNum=2;
 	private List<string> shapePool=new List<string>();
 	private List<string> colorPool =new List<string>();
 	private double spawnRatio;
@@ -43,19 +43,23 @@ public class ObjectTally : MonoBehaviour {
 			shapePool.Add (input[2]);
 			requiredShape = input[2];
 		}
-		int c = 1;
-		int s=1;
-		if (requiredColor==null){
-			c=0;
+		if(colorNum>1){
+			int c = 1;
+			if (requiredColor==null){
+				c=0;
+			}
+			for (int i=0; i < colorNum - c;i++){
+				colorPool.Add(PickColor());
+			}
 		}
-		if (requiredShape==null){
-			s=0;
-		}
-
-		for (int i=0; i < colorNum - c;i++)
-			colorPool.Add(PickColor());
-		for(int y=0;y<shapeNum-s;y++){
-			shapePool.Add (PickShape());
+		if(shapeNum>1){
+			int s=1;
+			if (requiredShape==null){
+				s=0;
+			}
+			for(int y=0;y<shapeNum-s;y++){
+				shapePool.Add (PickShape());
+			}
 		}
 		int num = (int)Mathf.Round(rows * columns * Random.Range (.4f, .8f));
 		ListAppender (Random.Range (1,3), num);
@@ -161,15 +165,12 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	string PickColor(){
-		if(colorNum==1){
-			return colorPool[0];
-		}
+
 		int poolCount = 0;
 		int needed = 1;
 		string colorselected = "NULL";
 		while (poolCount < needed) {
-			Debug.Log (possibleColors);
-			colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
+			colorselected = possibleColors [Random.Range (0, possibleColors.Length)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
 			}
@@ -177,14 +178,12 @@ public class ObjectTally : MonoBehaviour {
 		return colorselected;
 	}
 	string PickShape(){
-		if(shapeNum==1){
-			return shapePool[0];
-		}
+
 		int poolCount = 0;
 		int needed = 1;
 		string shapeselected = "NULL";
 		while (poolCount < needed) {
-			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
+			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length)];
 			if (!(requiredShape.Equals(shapeselected))){
 				poolCount++;
 			}
@@ -193,12 +192,11 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	string PickColorFromPool(){
-		//	Debug.Log ("LOL");
 		int poolCount = 0;
 		int needed = 1;
 		string colorselected = "NULL";
 		while (poolCount < needed) {
-			colorselected = colorPool [Random.Range (0, colorPool.Count - 1)];
+			colorselected = colorPool [Random.Range (0, colorPool.Count)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
 			}
@@ -206,12 +204,11 @@ public class ObjectTally : MonoBehaviour {
 		return colorselected;
 	}
 	string PickShapeFromPool(){
-		//	Debug.Log ("LOL");
 		int poolCount = 0;
 		int needed = 1;
 		string shapeselected = "NULL";
 		while (poolCount < needed) {
-			shapeselected = shapePool [Random.Range (0, shapePool.Count - 1)];
+			shapeselected = shapePool [Random.Range (0, shapePool.Count)];
 			if (!(requiredShape.Equals(shapeselected))){
 				poolCount++;
 			}
@@ -219,28 +216,4 @@ public class ObjectTally : MonoBehaviour {
 		return shapeselected;
 	}
 
-	/*string PickShape(){
-		string shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
-		if (shapePool.Count > 1 && shapePool.Contains (shapeselected)) {
-			PickShape ();
-		}
-		return shapeselected;
-	}
-	
-
-	string PickColorFromPool(){
-		string colorSelected = colorPool [Random.Range (0, colorPool.Count - 1)];
-		if(colorPool.Count>1 && colorSelected==requiredColor){
-			PickColorFromPool();
-		}
-		return colorSelected;
-	}
-
-	string PickShapeFromPool(){
-		string shapeSelected=shapePool[Random.Range(0,shapePool.Count-1)];
-		if (shapePool.Count>1 && shapeSelected==requiredShape){
-			PickShapeFromPool();
-		}
-		return shapeSelected;
-	}*/
 }
