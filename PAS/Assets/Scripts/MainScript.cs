@@ -16,12 +16,11 @@ public class MainScript : MonoBehaviour {
 	string lvlquestion;
 	DisableButton LB;
 	DisableButton RB;
-	GameObject tally;
+	public GameObject tally;
 	
 	// Use this for initialization
 	void Start () {
 		choice = -1;
-		tally = GameObject.Find ("ObjTally");
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
 		lite = GameObject.Find ("Directional light").GetComponent<Light>();
@@ -80,7 +79,8 @@ public class MainScript : MonoBehaviour {
 			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + "s?";
 		else 
 			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
-		tally.SendMessage ("Load",newQuestion.creationRatio, newQuestion.color, newQuestion.shape);
+		string temp =newQuestion.creationRatio.ToString();
+		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
 		state = 1;
 	}
 	
@@ -98,7 +98,7 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		if (time > 0) {
 			if (choice > -1){
-				if (tally.GetComponent<LeftMore>() == true){
+				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
 					if (choice == 0){
 						level += 1;
 						score.up ();

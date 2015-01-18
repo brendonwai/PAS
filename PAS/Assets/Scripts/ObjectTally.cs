@@ -33,15 +33,15 @@ public class ObjectTally : MonoBehaviour {
 		*/
 	}
 
-	public void Load(double ratio,string color=null,string shape=null){
-		spawnRatio = ratio;
-		if(color!=null){
-			requiredColor = color;
-			colorPool.Add (color);
+	public void Load(string[] input){
+		spawnRatio = System.Convert.ToDouble (input[0]);
+		if(input[1]!=null){
+			requiredColor = input[1];
+			colorPool.Add (input[1]);
 		}
-		if(shape!=null){
-			shapePool.Add (shape);
-			requiredShape = shape;
+		if(input[2]!=null){
+			shapePool.Add (input[2]);
+			requiredShape = input[2];
 		}
 		int c = 1;
 		int s=1;
