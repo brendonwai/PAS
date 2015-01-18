@@ -5,7 +5,7 @@ public struct Question{
 	public string shape;
 	public string color;
 	public string quantity;
-	public string creationRatio;
+	public double creationRatio;
 }
 
 public class QuestionGenerator{
