@@ -24,10 +24,10 @@ public class QuestionGenerator{
 	// The returns a question's indexs for a predefined array in the form <question, color, shape, side,ratio>.
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
-		string randomColor = NULL;
-		string randomShape = NULL;
+		string randomColor = null;
+		string randomShape = null;
 		string randomQuantity;
-		double ratio = (50+level)/100;		
+		double ratio = 1 / (1 + Math.Pow (Math.E, (level + 6) / 10)) + 0.5;		
 		if (level < 4) {
 			randomQuantity = quantities [r.Next(quantities.Length)];
 			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
