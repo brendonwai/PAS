@@ -22,7 +22,7 @@ public class MainScript : MonoBehaviour {
 	bool choosing;
 	Instantiate generator;
 	bool more;
-	
+
 	// Use this for initialization
 	void Start () {
 		choice = -1;
@@ -63,10 +63,11 @@ public class MainScript : MonoBehaviour {
 		choice =  1;
 	}
 
-	void nextLevel(){
+	void nextLevel(bool correct){
 		level += 1;
 		lvl.uplvl ();
-		lvl.upscore (5);
+		if (correct)
+			lvl.upscore (5);
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -140,26 +141,26 @@ public class MainScript : MonoBehaviour {
 				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
 					if (more == true){
 						if (choice == 0){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
-							if (lives == 0)
+							if (lives == 1)
 								GameOver ();
 							else 
 								lives--;
-								nextLevel();
+								nextLevel(false);
 						}
 					}
 					else{
 						if (choice == 1){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
 							if (lives == 1)
 								GameOver();
 							else{
 								lives--;
-								nextLevel();
+								nextLevel(false);
 							}
 						}
 					}
@@ -167,27 +168,27 @@ public class MainScript : MonoBehaviour {
 				else{
 					if (more == true){
 						if (choice == 1){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
 							if (lives == 1)
 								GameOver ();
 							else {
 								lives--;
-								nextLevel();
+								nextLevel(false);
 							}
 						}
 					}
 					else{
 						if (choice == 0){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
 							if (lives == 1)
 								GameOver ();
 							else{ 
 								lives--;
-								nextLevel ();
+								nextLevel (false);
 							}
 						}
 					}
@@ -201,7 +202,7 @@ public class MainScript : MonoBehaviour {
 				GameOver ();
 			else{
 	 			lives--;
-				nextLevel ();
+				nextLevel (false);
 			}
 		}
 	}
