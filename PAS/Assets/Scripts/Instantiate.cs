@@ -172,6 +172,17 @@ public class Instantiate : MonoBehaviour {
 		spawnInterval = Random.Range(5,10)*rate;
 		}
 	}
+
+	public void clearShapes()
+	{
+		foreach (GameObject shape in GameObject.FindGameObjectsWithTag("Shape"))
+		{
+			Object.Destroy(shape);
+		}
+
+		spawnRound = cubeCount;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (notDone) 
