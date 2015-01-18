@@ -197,7 +197,7 @@ public class Instantiate : MonoBehaviour {
 				SpawnNew ();
 				spawnRound--;
 
-				Debug.Log(spawnRound);
+				//Debug.Log(spawnRound);
 
 			}
 		}
