@@ -10,14 +10,21 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=1;
-	private int shapeNum=2;
-	private List<string> shapePool=null;
-	private List<string> colorPool=null;
+	private int colorNum=3;
+	private int shapeNum=3;
+	private List<string> shapePool;
+	private List<string> colorPool;
 	private double spawnRatio;
-	private List<string[]> LeftPool=null;
-	private List<string[]> RightPool=null;
+	private List<string[]> LeftPool;
+	private List<string[]> RightPool;
 	private List<string[]> ListRow;
+
+	void Start(){
+		shapePool=new List<string>();
+		colorPool=new List<string>();
+		LeftPool=new List<string[]>();
+		RightPool=new List<string[]>();
+	}
 
 	void Load(double ratio,string color=null,string shape=null){
 		spawnRatio = ratio;
@@ -29,10 +36,6 @@ public class ObjectTally : MonoBehaviour {
 			shapePool.Add (shape);
 			requiredShape = shape;
 		}
-
-	}
-
-	void Generate(){
 		int c = 1;
 		int s=1;
 		if (requiredColor==null){
@@ -41,15 +44,17 @@ public class ObjectTally : MonoBehaviour {
 		if (requiredShape==null){
 			s=0;
 		}
-		for (int i=0;i<colorNum-c;i++){
+
+		for (int i=0; i < colorNum - c;i++)
 			colorPool.Add(PickColor());
-		}
 		for(int y=0;y<shapeNum-s;y++){
 			shapePool.Add (PickShape());
 		}
 		int num = (int)Mathf.Round(rows * columns * Random.Range (.4f, .8f));
 		ListAppender (Random.Range (1,2), num);
 	}
+	
+		
 
 	List<string[]> getObjectRow(){
 		ListRow = new List<string[]> ();
@@ -149,24 +154,71 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	string PickColor(){
-		string colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
-		if (colorPool.Contains(colorselected)) {
-			PickColor ();
+	//	Debug.Log ("LOL");
+		int poolCount = 0;
+		int needed = 1;
+		string colorselected = "NULL";
+		while (poolCount < needed) {
+			colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
+			if (!(requiredColor.Equals(colorselected))){
+				poolCount++;
+			}
 		}
 		return colorselected;
 	}
-
 	string PickShape(){
-		string shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
-		if (shapePool.Contains (shapeselected)) {
-			PickShape ();
+		//	Debug.Log ("LOL");
+		int poolCount = 0;
+		int needed = 1;
+		string shapeselected = "NULL";
+		while (poolCount < needed) {
+			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
+			if (!(requiredShape.Equals(shapeselected))){
+				poolCount++;
+			}
 		}
 		return shapeselected;
 	}
 
 	string PickColorFromPool(){
+		//	Debug.Log ("LOL");
+		int poolCount = 0;
+		int needed = 1;
+		string colorselected = "NULL";
+		while (poolCount < needed) {
+			colorselected = colorPool [Random.Range (0, colorPool.Count - 1)];
+			if (!(requiredColor.Equals(colorselected))){
+				poolCount++;
+			}
+		}
+		return colorselected;
+	}
+	string PickShapeFromPool(){
+		//	Debug.Log ("LOL");
+		int poolCount = 0;
+		int needed = 1;
+		string shapeselected = "NULL";
+		while (poolCount < needed) {
+			shapeselected = shapePool [Random.Range (0, shapePool.Count - 1)];
+			if (!(requiredShape.Equals(shapeselected))){
+				poolCount++;
+			}
+		}
+		return shapeselected;
+	}
+
+	/*string PickShape(){
+		string shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
+		if (shapePool.Count > 1 && shapePool.Contains (shapeselected)) {
+			PickShape ();
+		}
+		return shapeselected;
+	}
+	
+
+	string PickColorFromPool(){
 		string colorSelected = colorPool [Random.Range (0, colorPool.Count - 1)];
-		if(colorSelected==requiredColor){
+		if(colorPool.Count>1 && colorSelected==requiredColor){
 			PickColorFromPool();
 		}
 		return colorSelected;
@@ -174,9 +226,9 @@ public class ObjectTally : MonoBehaviour {
 
 	string PickShapeFromPool(){
 		string shapeSelected=shapePool[Random.Range(0,shapePool.Count-1)];
-		if (shapeSelected==requiredShape){
+		if (shapePool.Count>1 && shapeSelected==requiredShape){
 			PickShapeFromPool();
 		}
 		return shapeSelected;
-	}
+	}*/
 }
