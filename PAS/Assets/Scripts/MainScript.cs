@@ -22,7 +22,9 @@ public class MainScript : MonoBehaviour {
 	bool choosing;
 	Instantiate generator;
 	bool more;
-	
+	public float looktime;
+	Text livestext;
+
 	// Use this for initialization
 	void Start () {
 		choice = -1;
@@ -34,11 +36,11 @@ public class MainScript : MonoBehaviour {
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		q.text = "";
-		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
-		time = timersc.count;;
+		livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
+		time = timersc.count;
 		level = 1;
 		lives = 3;
-		//livestext.text = "";//lives.ToString ();
+		livestext.text = "Lives:" + lives.ToString ();
 		state = 0;
 		
 	}
@@ -63,10 +65,11 @@ public class MainScript : MonoBehaviour {
 		choice =  1;
 	}
 
-	void nextLevel(){
+	void nextLevel(bool correct){
 		level += 1;
 		lvl.uplvl ();
-		lvl.upscore (5);
+		if (correct)
+			lvl.upscore (5);
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -74,6 +77,7 @@ public class MainScript : MonoBehaviour {
 		choosing = false;
 		timersc.started = false;
 		generator.clearShapes ();
+		livestext.text = "Lives:" + lives.ToString ();
 	}
 	
 	// Update is called once per frame
@@ -109,6 +113,7 @@ public class MainScript : MonoBehaviour {
 			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
+		looktime = (float) newQuestion.creationRatio * 6;
 		state = 1;
 	}
 	
@@ -117,7 +122,7 @@ public class MainScript : MonoBehaviour {
 			falling = true;
 			timer0 = Time.time;
 		}
-		if (Time.time - timer0 > 3){
+		if (Time.time - timer0 > looktime){
 			falling = false;
 			state = 2;
 		}
@@ -140,49 +145,55 @@ public class MainScript : MonoBehaviour {
 				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
 					if (more == true){
 						if (choice == 0){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
-					//		if (lives == 0)
+							if (lives == 1)
 								GameOver ();
-					//		else 
-					//			lives--;
+							else 
+								lives--;
+								nextLevel(false);
 						}
 					}
 					else{
 						if (choice == 1){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
-					//		if (lives == 1)
+							if (lives == 1)
 								GameOver();
-					//		else 
-					//			lives--;
+							else{
+								lives--;
+								nextLevel(false);
+							}
 						}
 					}
 				}
 				else{
 					if (more == true){
 						if (choice == 1){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
-						//	if (lives == 1)
+							if (lives == 1)
 								GameOver ();
-						//	else 
-						//		lives--;
+							else {
+								lives--;
+								nextLevel(false);
+							}
 						}
 					}
 					else{
 						if (choice == 0){
-							nextLevel ();
+							nextLevel (true);
 						}
 						else{
-						//	if (lives == 1)
+							if (lives == 1)
 								GameOver ();
-						//	else 
-						//		lives--;
-
+							else{ 
+								lives--;
+								nextLevel (false);
+							}
 						}
 					}
 				}
@@ -191,11 +202,12 @@ public class MainScript : MonoBehaviour {
 			}
 		}
 		else {
-		//	if (lives == 1)
-			GameOver ();
-		//	else 
-	 	//	lives--;
-		//	time = 0;
+			if (lives == 1)
+				GameOver ();
+			else{
+	 			lives--;
+				nextLevel (false);
+			}
 		}
 	}
 	
