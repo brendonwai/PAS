@@ -8,17 +8,25 @@ public class ScoreScript : MonoBehaviour {
 	MainScript mainobj;
 	string defaulttext = "Level: ";
 	public Text lvlText;
+	public Text scoreText;
 	int level;
 	public int score;
 
 	//call this when you level up/score up
-	public void up(){
+	public void uplvl(){
 		level = mainobj.level;
 		lvlText.text = defaulttext + level.ToString ();
 	}
 
+	public void upscore(int newScore){
+		score += newScore;
+		scoreText.text = "Score: " + score.ToString ();
+	}
+
 	// Use this for initialization
 	void Start () {
+		score = 0;
+		scoreText = GameObject.Find ("ScoreText").GetComponent<Text> ();
 		mainobj = GameObject.Find ("MainObject").GetComponent<MainScript> ();
 		level = mainobj.level;
 		lvlText = GetComponent<Text> ();

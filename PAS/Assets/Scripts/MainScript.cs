@@ -64,7 +64,8 @@ public class MainScript : MonoBehaviour {
 
 	void nextLevel(){
 		level += 1;
-		lvl.up ();
+		lvl.uplvl ();
+		lvl.upscore (5);
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -108,8 +109,6 @@ public class MainScript : MonoBehaviour {
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
 		state = 1;
-		Debug.Log (newQuestion.quantity);
-		Debug.Log (tally.GetComponent<ObjectTally> ().LeftMore);
 	}
 	
 	void displayBlockFall(){
