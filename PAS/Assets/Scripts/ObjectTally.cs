@@ -10,8 +10,8 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=2;
-	private int shapeNum=2;
+	private int colorNum=3;
+	private int shapeNum=3;
 	private List<string> shapePool;
 	private List<string> colorPool;
 	private double spawnRatio;
@@ -159,7 +159,7 @@ public class ObjectTally : MonoBehaviour {
 		int needed = 1;
 		string colorselected = "NULL";
 		while (poolCount < needed) {
-			colorselected = possibleColors [Random.Range (0, possibleColors.Length )];
+			colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
 			}
@@ -167,11 +167,12 @@ public class ObjectTally : MonoBehaviour {
 		return colorselected;
 	}
 	string PickShape(){
+		//	Debug.Log ("LOL");
 		int poolCount = 0;
 		int needed = 1;
 		string shapeselected = "NULL";
 		while (poolCount < needed) {
-			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length )];
+			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
 			if (!(requiredShape.Equals(shapeselected))){
 				poolCount++;
 			}
@@ -180,14 +181,12 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 	string PickColorFromPool(){
-		if (colorPool.Count == 1) {
-			return colorPool[0];
-		}
+		//	Debug.Log ("LOL");
 		int poolCount = 0;
 		int needed = 1;
 		string colorselected = "NULL";
 		while (poolCount < needed) {
-			colorselected = colorPool [Random.Range (0, colorPool.Count )];
+			colorselected = colorPool [Random.Range (0, colorPool.Count - 1)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
 			}
@@ -195,14 +194,12 @@ public class ObjectTally : MonoBehaviour {
 		return colorselected;
 	}
 	string PickShapeFromPool(){
-		if (shapePool.Count == 1) {
-			return shapePool[0];
-		}
+		//	Debug.Log ("LOL");
 		int poolCount = 0;
 		int needed = 1;
 		string shapeselected = "NULL";
 		while (poolCount < needed) {
-			shapeselected = shapePool [Random.Range (0, shapePool.Count )];
+			shapeselected = shapePool [Random.Range (0, shapePool.Count - 1)];
 			if (!(requiredShape.Equals(shapeselected))){
 				poolCount++;
 			}
