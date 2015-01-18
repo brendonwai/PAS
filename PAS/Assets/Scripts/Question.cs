@@ -2,18 +2,18 @@
 using System.Collections;
 
 public struct Question{
-	public int shape;
-	public int color;
-	public int quantity;
+	public string shape;
+	public string color;
+	public string quantity;
 	public double creationRatio;
 }
 
 public class QuestionGenerator{
-	private static int[] quantities = {0,1};
-	private static int[] colors = {0,1,2,3,4,5};
-	private static int[] shapes = {0,1,2,3};
+	private static string[] quantities = {"more","less"};
+	private static string[] colors = {"blue","red","green","purple","yellow"};
+	private static string[] shapes = {"circle","square","triangle"};
 
-	public Question createQuestion(Question question, int shape, int color, int quantity, double ratio){
+	public Question createQuestion(Question question, string shape, string color, string quantity, double ratio){
 		question.shape = shape;
 		question.color = color;
 		question.quantity = quantity;
@@ -24,15 +24,15 @@ public class QuestionGenerator{
 	// The returns a question's indexs for a predefined array in the form <question, color, shape, side,ratio>.
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
-		int randomColor = 0;
-		int randomShape = 0;
-		int randomQuantity = 0;
-		double ratio = (50+level)/100;		
+		string randomColor = null;
+		string randomShape = null;
+		string randomQuantity;
+		double ratio = 1 / (1 + Math.Pow (Math.E, (level + 6) / 10)) + 0.5;		
 		if (level < 4) {
-			randomQuantity = quantities [r.Next (2)];
+			randomQuantity = quantities [r.Next(quantities.Length)];
 			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 		} else if (level < 7) {
-			randomQuantity = quantities [r.Next (2)];
+			randomQuantity = quantities [r.Next (quantities.Length)];
 			switch (r.Next (2)) {
 			case 0:
 				randomShape = shapes [r.Next (shapes.Length)]; 
@@ -43,7 +43,7 @@ public class QuestionGenerator{
 
 			}
 		} else {
-			randomQuantity = quantities [r.Next (2)];
+			randomQuantity = quantities [r.Next (quantities.Length)];
 			randomShape = shapes [r.Next (shapes.Length)];
 			randomColor = colors [r.Next (colors.Length)]; 
 		}
