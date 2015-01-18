@@ -108,6 +108,8 @@ public class MainScript : MonoBehaviour {
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
 		state = 1;
+		Debug.Log (newQuestion.quantity);
+		Debug.Log (tally.GetComponent<ObjectTally> ().LeftMore);
 	}
 	
 	void displayBlockFall(){
@@ -135,20 +137,40 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		if (time > 0) {
 			if (choice > -1){
-				if ( tally.GetComponent<ObjectTally>().LeftMore== true && more == true){
-					if (choice == 0){
-						nextLevel ();
+				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
+					if (more == true){
+						if (choice == 0){
+							nextLevel ();
+						}
+						else{
+							GameOver ();
+						}
 					}
 					else{
-						GameOver ();
+						if (choice == 1){
+							nextLevel ();
+						}
+						else{
+							GameOver ();
+						}
 					}
 				}
 				else{
-					if (choice == 1){
-						nextLevel ();
+					if (more == true){
+						if (choice == 1){
+							nextLevel ();
+						}
+						else{
+							GameOver ();
+						}
 					}
 					else{
-						GameOver ();
+						if (choice == 0){
+							nextLevel ();
+						}
+						else{
+							GameOver ();
+						}
 					}
 				}
 				choice = -1;
