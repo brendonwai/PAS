@@ -10,14 +10,20 @@ public class ObjectTally : MonoBehaviour {
 	public bool LeftMore;
 	private string requiredColor;
 	private string requiredShape;
-	private int colorNum=1;
-	private int shapeNum=2;
-	private List<string> shapePool=null;
-	private List<string> colorPool=null;
+	private int colorNum=3;
+	private int shapeNum=3;
+	private List<string> shapePool=new List<string>();
+	private List<string> colorPool=new List<string>();
 	private double spawnRatio;
-	private List<string[]> LeftPool=null;
-	private List<string[]> RightPool=null;
+	private List<string[]> LeftPool=new List<string[]>();
+	private List<string[]> RightPool=new List<string[]>();
 	private List<string[]> ListRow;
+
+	void Start(){
+		Debug.Log ("something");
+		Load (.3, "Red", "Circle");
+		//Debug.Log (getObjectRow ());
+	}
 
 	void Load(double ratio,string color=null,string shape=null){
 		spawnRatio = ratio;
@@ -29,10 +35,6 @@ public class ObjectTally : MonoBehaviour {
 			shapePool.Add (shape);
 			requiredShape = shape;
 		}
-
-	}
-
-	void Generate(){
 		int c = 1;
 		int s=1;
 		if (requiredColor==null){
@@ -50,6 +52,8 @@ public class ObjectTally : MonoBehaviour {
 		int num = (int)Mathf.Round(rows * columns * Random.Range (.4f, .8f));
 		ListAppender (Random.Range (1,2), num);
 	}
+	
+		
 
 	List<string[]> getObjectRow(){
 		ListRow = new List<string[]> ();
@@ -150,7 +154,7 @@ public class ObjectTally : MonoBehaviour {
 
 	string PickColor(){
 		string colorselected = possibleColors [Random.Range (0, possibleColors.Length - 1)];
-		if (colorPool.Contains(colorselected)) {
+		if (colorPool.Count>1 && colorPool.Contains(colorselected)) {
 			PickColor ();
 		}
 		return colorselected;
@@ -158,7 +162,7 @@ public class ObjectTally : MonoBehaviour {
 
 	string PickShape(){
 		string shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length - 1)];
-		if (shapePool.Contains (shapeselected)) {
+		if ((shapePool.Count > 1) && (shapePool.Contains (shapeselected))) {
 			PickShape ();
 		}
 		return shapeselected;
@@ -166,7 +170,7 @@ public class ObjectTally : MonoBehaviour {
 
 	string PickColorFromPool(){
 		string colorSelected = colorPool [Random.Range (0, colorPool.Count - 1)];
-		if(colorSelected==requiredColor){
+		if(colorPool.Count>1 && colorSelected==requiredColor){
 			PickColorFromPool();
 		}
 		return colorSelected;
@@ -174,7 +178,7 @@ public class ObjectTally : MonoBehaviour {
 
 	string PickShapeFromPool(){
 		string shapeSelected=shapePool[Random.Range(0,shapePool.Count-1)];
-		if (shapeSelected==requiredShape){
+		if (shapePool.Count>1 && shapeSelected==requiredShape){
 			PickShapeFromPool();
 		}
 		return shapeSelected;
