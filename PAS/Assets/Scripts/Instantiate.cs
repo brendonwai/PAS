@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// ["shape","color"]
+// getObjectRow()
+
+
 public class Instantiate : MonoBehaviour {
 	public GameObject cube;
 	public GameObject spawnPoint = null;
@@ -9,6 +13,7 @@ public class Instantiate : MonoBehaviour {
 	private float lastSpawn;
 	public GameObject gameObject1 = null;
 
+	public GameObject rowGetter;
 
 
 	private bool notDone = true;
