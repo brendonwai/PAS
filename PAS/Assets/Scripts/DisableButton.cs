@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class DisableButton : MonoBehaviour {
 	public Transform button;
 
-	public void changestat(){
+	public void changestate(){
 
 		if (button.GetComponent<Button>().IsInteractable() == true)
 		{
