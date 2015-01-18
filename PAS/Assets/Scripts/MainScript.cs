@@ -147,6 +147,7 @@ public class MainScript : MonoBehaviour {
 								GameOver ();
 							else 
 								lives--;
+								nextLevel();
 						}
 					}
 					else{
@@ -156,8 +157,10 @@ public class MainScript : MonoBehaviour {
 						else{
 							if (lives == 1)
 								GameOver();
-							else 
+							else{
 								lives--;
+								nextLevel();
+							}
 						}
 					}
 				}
@@ -169,8 +172,10 @@ public class MainScript : MonoBehaviour {
 						else{
 							if (lives == 1)
 								GameOver ();
-							else 
+							else {
 								lives--;
+								nextLevel();
+							}
 						}
 					}
 					else{
@@ -180,8 +185,10 @@ public class MainScript : MonoBehaviour {
 						else{
 							if (lives == 1)
 								GameOver ();
-							else 
+							else{ 
 								lives--;
+								nextLevel ();
+							}
 						}
 					}
 				}
@@ -194,7 +201,7 @@ public class MainScript : MonoBehaviour {
 				GameOver ();
 			else{
 	 			lives--;
-				timersc.count = 6;
+				nextLevel ();
 			}
 		}
 	}
