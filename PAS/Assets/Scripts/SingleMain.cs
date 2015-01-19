@@ -256,7 +256,7 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void GameOver(){
-		result.setWinner ("Game Over");
+		results.setWinner ("Game Over");
 		Application.LoadLevel ("GameOver");
 	}
 	
