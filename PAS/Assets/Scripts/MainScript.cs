@@ -80,6 +80,8 @@ public class MainScript : MonoBehaviour {
 			lvl.upscore (5);
 		if (correct2)
 			lvl.upscore2 (5);
+		if (level >= 10 && lvl.score != lvl.score2)
+			GameOver ();
 		c1 = false;
 		c2 = false;
 		p1 = false;
