@@ -24,6 +24,7 @@ public class MainScript : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
+	ShootingStar ss;
 
 	// Use this for initialization
 	void Start () {
@@ -118,6 +119,8 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void displayBlockFall(){
+		//if (level % 5 == 0) {
+		//	}
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
