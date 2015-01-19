@@ -129,7 +129,7 @@ public class SingleMain : MonoBehaviour {
 			shootingStar.starFactory();
 			starSpawned = true;
 		}
-		if (starSpawned)
+		if (starSpawned && level % 2 != 0)
 			starSpawned = false;
 		if (falling == false) {
 			falling = true;
