@@ -27,7 +27,7 @@ public class QuestionGenerator{
 		string randomColor = null;
 		string randomShape = null;
 		string randomQuantity;
-		double ratio = 1 / (1 + Math.Pow (Math.E, (level + 6) / 10)) + 0.5;		
+		double ratio = 1 / (1 + Math.Pow (Math.E, (level + 6) / 10)) + 0.58;		
 		randomQuantity = quantities [r.Next (quantities.Length)];
 		randomShape = shapes [r.Next (shapes.Length)];
 		randomColor = colors [r.Next (colors.Length)]; 
