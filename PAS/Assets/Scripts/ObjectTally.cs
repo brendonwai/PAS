@@ -24,13 +24,6 @@ public class ObjectTally : MonoBehaviour {
 		colorPool=new List<string>();
 		LeftPool=new List<string[]>();
 		RightPool=new List<string[]>();
-		/*
-		Load (.3, "Purple", "Circle");
-		List<string[]> st = getObjectRow ();
-		foreach(string[] s in st){
-			Debug.Log("s1: "+s[0]+"s2: "+s[1]);
-		}
-		*/
 	}
 
 	public void Load(string[] input){
