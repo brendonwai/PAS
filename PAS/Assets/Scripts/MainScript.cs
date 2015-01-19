@@ -22,6 +22,7 @@ public class MainScript : MonoBehaviour {
 	bool choosing;
 	Instantiate generator;
 	bool more;
+	bool stuff;
 
 	// Use this for initialization
 	void Start () {
