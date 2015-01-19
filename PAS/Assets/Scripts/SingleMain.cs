@@ -49,7 +49,6 @@ public class SingleMain : MonoBehaviour {
 		livestext.text = "Lives " + lives.ToString ();
 		state = 0;
 		shootingStar = starSpawner.GetComponent<ShootingStar> ();
-		explosion = explosionSpawner.GetComponent<Explosion> ();
 		looktime = 5f;
 	}
 	
