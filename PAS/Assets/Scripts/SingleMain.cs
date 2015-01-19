@@ -24,7 +24,7 @@ public class SingleMain : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
-	int starLevel;
+	int starLevel = 3;
 	Play sound;
 
 	
@@ -143,7 +143,7 @@ public class SingleMain : MonoBehaviour {
 				shootingStar.starFactory ();
 				starSpawned = true;
 		}
-		if (Input.GetKey ("space") && level % 2 == 0 && gotStar == false){
+		if (Input.GetKey ("space") && (level == starLevel) && gotStar == false){
 				gotStar = true;
 				lvl.upscore (5);
 				Vector3 lastPos = shootingStar.destroyStar();
