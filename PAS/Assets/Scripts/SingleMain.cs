@@ -26,7 +26,6 @@ public class SingleMain : MonoBehaviour {
 	Text livestext;
 	int starLevel = 3;
 	Play sound;
-
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
@@ -165,6 +164,15 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void guess(){
+		if (Input.GetKey("a"))
+			choice = 0;
+		if (Input.GetKey("d"))
+			choice = 1;
+		if (Input.GetKey("left"))
+			choice = 0;
+		if (Input.GetKey("right"))
+			choice = 1;
+
 		if (choosing == false) {
 			choosing = true;
 			LB.changestate ();
