@@ -57,7 +57,11 @@
      <Compile Include="Assets\Scripts\ReturnToMenu.cs" />
      <Compile Include="Assets\Scripts\ScoreScript.cs" />
      <Compile Include="Assets\Scripts\ShootingStar.cs" />
+     <Compile Include="Assets\Scripts\SingleMain.cs" />
+     <Compile Include="Assets\Scripts\SingleScore.cs" />
      <Compile Include="Assets\Scripts\TimerScript.cs" />
+     <Compile Include="Assets\Scripts\findMultiplayerResults.cs" />
+     <Compile Include="Assets\Scripts\multiplayerResults.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

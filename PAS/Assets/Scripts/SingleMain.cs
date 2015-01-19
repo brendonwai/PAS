@@ -133,7 +133,7 @@ public class SingleMain : MonoBehaviour {
 		if (Input.GetKey ("space") && level % 2 == 0 && gotStar == false){
 				gotStar = true;
 				lvl.upscore (5);
-				Object.Destroy(shootingStar);
+				shootingStar.destroyStar();
 		}
 		if (starSpawned && level % 2 != 0)
 			starSpawned = false;

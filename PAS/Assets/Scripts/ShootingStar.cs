@@ -22,4 +22,11 @@ public class ShootingStar : MonoBehaviour {
 		shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
 		shootingStar.rigidbody2D.AddForce (Vector3.right * 400);
 	}
+	public void destroyStar() {
+		foreach (GameObject shape in GameObject.FindGameObjectsWithTag("ShootingStar"))
+		{
+			Debug.Log (shape);
+			Object.Destroy(shape);
+		}
+	}
 }
