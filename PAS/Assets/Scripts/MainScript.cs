@@ -41,7 +41,7 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		level = 1;
 		lives = 3;
-		livestext.text = "Lives:" + lives.ToString ();
+		livestext.text = "Lives " + lives.ToString ();
 		state = 0;
 		
 	}
@@ -78,7 +78,7 @@ public class MainScript : MonoBehaviour {
 		choosing = false;
 		timersc.started = false;
 		generator.clearShapes ();
-		livestext.text = "Lives:" + lives.ToString ();
+		livestext.text = "Lives " + lives.ToString ();
 	}
 	
 	// Update is called once per frame
@@ -115,6 +115,7 @@ public class MainScript : MonoBehaviour {
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
 		looktime = (float) newQuestion.creationRatio * 6;
+		Debug.Log (newQuestion.creationRatio);
 		state = 1;
 	}
 	
