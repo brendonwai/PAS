@@ -14,7 +14,7 @@ public class multiplayerResults : MonoBehaviour {
 	
 	public void setWinner(string playerName)
 	{
-		winner = playerName + "Wins";	
+		winner = playerName;	
 	}
 
 }

@@ -26,6 +26,7 @@ public class SingleMain : MonoBehaviour {
 	Text livestext;
 	int starLevel = 3;
 	Play sound;
+	multiplayerResults results;
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
@@ -36,6 +37,7 @@ public class SingleMain : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		choice = -1;
+		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
@@ -254,6 +256,7 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void GameOver(){
+		result.setWinner ("Game Over");
 		Application.LoadLevel ("GameOver");
 	}
 	

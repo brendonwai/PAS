@@ -251,9 +251,9 @@ public class MainScript : MonoBehaviour {
 	
 	void GameOver(){
 		if (lvl.score > lvl.score2)
-						result.setWinner ("Player 1");
+						result.setWinner ("Player 1 Wins");
 				else
-						result.setWinner ("Player 2");
+						result.setWinner ("Player 2 Wins");
 		Application.LoadLevel ("GameOver");
 	}
 	
