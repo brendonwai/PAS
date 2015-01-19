@@ -6,12 +6,18 @@ public class MainScript : MonoBehaviour {
 	QuestionGenerator QG = new QuestionGenerator();
 	ScoreScript lvl;
 	public int level;
-	public int lives;
+	int lives;
+	int lives2;
+	bool p1;
+	bool c1;
+	bool p2;
+	bool c2;
 	TimerScript timersc;
 	int time;
 	Light lite;
 	int state;
 	int choice;
+	int choice2;
 	Text q;
 	string lvlquestion;
 	DisableButton LB;
@@ -32,6 +38,7 @@ public class MainScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		choice = -1;
+		choice2 = -1;
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
@@ -44,7 +51,8 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		level = 1;
 		lives = 3;
-		livestext.text = "Lives " + lives.ToString ();
+		lives2 = 3;
+		livestext.text = "Lives " + lives.ToString() + "Lives2" + lives2.ToString ();
 		state = 0;
 		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 		looktime = 5f;
@@ -70,11 +78,13 @@ public class MainScript : MonoBehaviour {
 		choice =  1;
 	}
 
-	void nextLevel(bool correct){
+	void nextLevel(bool correct1, bool correct2){
 		level += 1;
 		lvl.uplvl ();
-		if (correct)
+		if (correct1)
 			lvl.upscore (5);
+		if (correct2)
+			lvl.upscore2 (5);
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -82,7 +92,7 @@ public class MainScript : MonoBehaviour {
 		choosing = false;
 		timersc.started = false;
 		generator.clearShapes ();
-		livestext.text = "Lives " + lives.ToString ();
+		livestext.text = "Lives " + lives.ToString () + "Lives2" +  lives2.ToString ();
 		if (looktime > 3) {
 			looktime -= 0.1f;
 			}
@@ -142,6 +152,15 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void guess(){
+		if (Input.GetKey("a"))
+			choice = 0;
+		if (Input.GetKey("d"))
+			choice = 1;
+		if (Input.GetKey("left"))
+			choice2 = 0;
+		if (Input.GetKey("right"))
+			choice2 = 1;
+		
 		if (choosing == false) {
 			choosing = true;
 			LB.changestate ();
@@ -152,72 +171,97 @@ public class MainScript : MonoBehaviour {
 		timersc.StartTimer ();
 		time = timersc.count;
 		if (time > 0) {
-			if (choice > -1){
-				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
-					if (more == true){
-						if (choice == 0){
-							nextLevel (true);
+						if (choice > -1 && p1 == false && lives > 0) {
+								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
+										if (more == true) {
+												if (choice == 0) {
+														c1 = true;
+												} else {
+														c1 = false;
+														lives--;
+												}
+										} else {
+												if (choice == 1) {
+														c1 = true;
+												} else {
+														c1 = false;
+							lives--;
+												}
+										}
+								} else {
+										if (more == true) {
+												if (choice == 1) {
+														c1 = true;
+												} else {
+														c1 = false;
+							lives--;
+												}
+										} else {
+												if (choice == 0) {
+														c1 = true;
+												} else {
+														c1 = false;
+							lives--;
+												}
+										}
+								}
+								p1 = true;
+								choice = -1;
 						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else 
-								lives--;
-								nextLevel(false);
+						//player2
+						if (choice2 > -1 && p2 == false && lives2 > 0) {
+								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
+										if (more == true) {
+												if (choice2 == 0) {
+														c2 = true;
+												} else {
+														c2 = false;
+							lives2--;
+												}
+										} else {
+												if (choice2 == 1) {
+														c2 = true;
+												} else {
+														c2 = false;
+							lives2--;
+												}
+										}
+								} else {
+										if (more == true) {
+												if (choice2 == 1) {
+														c2 = true;
+												} else {
+														c2 = false;
+							lives2--;
+												}
+										} else {
+												if (choice2 == 0) {
+														c2 = true;
+												} else {
+														c2 = false;
+							lives2--;
+												}
+										}
+								}
+				p2 = true;
+								choice2 = -1;
 						}
-					}
-					else{
-						if (choice == 1){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver();
-							else{
-								lives--;
-								nextLevel(false);
-							}
-						}
-					}
 				}
-				else{
-					if (more == true){
-						if (choice == 1){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else {
-								lives--;
-								nextLevel(false);
-							}
-						}
-					}
-					else{
-						if (choice == 0){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else{ 
-								lives--;
-								nextLevel (false);
-							}
-						}
-					}
-				}
-				choice = -1;
-				//choice is passed here
-			}
-		}
 		else {
-			if (lives == 1)
+			if (lives <= 0 && lives2 <= 0)
 				GameOver ();
 			else{
-	 			lives--;
-				nextLevel (false);
+				if (p1 == false){
+					lives--;
+				}
+				if (p2 == false){
+					lives2--;
+				}
+			if (lives > 0)
+					p1 = false;
+			if (lives2 > 0)
+					p2 = false;
+				nextLevel (c1,c2);
 			}
 		}
 	}
