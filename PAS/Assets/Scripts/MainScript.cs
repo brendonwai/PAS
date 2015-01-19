@@ -87,6 +87,8 @@ public class MainScript : MonoBehaviour {
 		c2 = false;
 		p1 = false;
 		p2 = false;
+		choice = -1;
+		choice2 = -1;
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -155,13 +157,13 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void guess(){
-		if (Input.GetKey("a"))
+		if (Input.GetKey("a") && p1 == false)
 			choice = 0;
-		if (Input.GetKey("d"))
+		if (Input.GetKey("d") && p1 == false)
 			choice = 1;
-		if (Input.GetKey("left"))
+		if (Input.GetKey("left") && p2 == false)
 			choice2 = 0;
-		if (Input.GetKey("right"))
+		if (Input.GetKey("right") && p2 == false)
 			choice2 = 1;
 		
 		if (choosing == false) {
@@ -243,7 +245,7 @@ public class MainScript : MonoBehaviour {
 						}
 				}
 		else {
-			if (level > 10 && lvl.score != lvl.score2)
+			if (level >= 10 && lvl.score != lvl.score2)
 				GameOver ();
 			else{
 				nextLevel (c1,c2);
