@@ -24,11 +24,9 @@ public class SingleMain : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
-<<<<<<< HEAD
 	int starLevel;
-=======
 	Play sound;
->>>>>>> 0b114622f5c62b9815f08a36172e1e30af9cd27f
+
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
