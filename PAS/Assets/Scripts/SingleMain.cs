@@ -135,14 +135,14 @@ public class SingleMain : MonoBehaviour {
 				lvl.upscore (5);
 				shootingStar.destroyStar();
 		}
-		if (starSpawned && level % 2 != 0)
-			starSpawned = false;
-			gotStar = false;
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
 		}
 		if (Time.time - timer0 > looktime){
+			if (starSpawned && level % 2 != 0)
+				starSpawned = false;
+			gotStar = false;
 			falling = false;
 			state = 2;
 		}
