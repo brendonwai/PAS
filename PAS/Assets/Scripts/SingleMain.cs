@@ -24,6 +24,7 @@ public class SingleMain : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
+	int starLevel;
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
@@ -127,7 +128,11 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void displayBlockFall(){
-		if (level % 2 == 0 && !starSpawned) {
+		if (level % 5 == 0) {
+			System.Random r = new System.Random();
+			this.starLevel = r.Next (level, level + 5);
+		}
+		if (level == starLevel && !starSpawned) {
 				shootingStar.starFactory ();
 				starSpawned = true;
 		}
