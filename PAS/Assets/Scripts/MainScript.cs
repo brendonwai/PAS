@@ -30,6 +30,7 @@ public class MainScript : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
+	multiplayerResults result;
 
 	public GameObject starSpawner;
 	ShootingStar shootingStar;
@@ -39,6 +40,7 @@ public class MainScript : MonoBehaviour {
 	void Start () {
 		choice = -1;
 		choice2 = -1;
+		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
@@ -81,6 +83,10 @@ public class MainScript : MonoBehaviour {
 			lvl.upscore (5);
 		if (correct2)
 			lvl.upscore2 (5);
+		c1 = false;
+		c2 = false;
+		p1 = false;
+		p2 = false;
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -246,6 +252,10 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void GameOver(){
+		if (lvl.score > lvl.score2)
+						result.setWinner ("Player 1");
+				else
+						result.setWinner ("Player 2");
 		Application.LoadLevel ("GameOver");
 	}
 	
