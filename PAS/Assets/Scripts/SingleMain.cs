@@ -28,6 +28,7 @@ public class SingleMain : MonoBehaviour {
 	public GameObject starSpawner;
 	ShootingStar shootingStar;
 	bool starSpawned;
+	bool gotStar;
 	
 	// Use this for initialization
 	void Start () {
@@ -126,11 +127,17 @@ public class SingleMain : MonoBehaviour {
 	
 	void displayBlockFall(){
 		if (level % 2 == 0 && !starSpawned) {
-			shootingStar.starFactory();
-			starSpawned = true;
+				shootingStar.starFactory ();
+				starSpawned = true;
+		}
+		if (Input.GetKey ("space") && level % 2 == 0 && gotStar == false){
+				gotStar = true;
+				lvl.upscore (5);
+				Object.Destroy(shootingStar);
 		}
 		if (starSpawned && level % 2 != 0)
 			starSpawned = false;
+			gotStar = false;
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
