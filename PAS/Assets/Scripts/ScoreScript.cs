@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class ScoreScript : MonoBehaviour {
 
 	MainScript mainobj;
-	string defaulttext = "Level: ";
+	string defaulttext = "Level ";
 	public Text lvlText;
 	public Text scoreText;
 	int level;
@@ -20,7 +20,7 @@ public class ScoreScript : MonoBehaviour {
 
 	public void upscore(int newScore){
 		score += newScore;
-		scoreText.text = "Score: " + score.ToString ();
+		scoreText.text = "Score " + score.ToString ();
 	}
 
 	// Use this for initialization

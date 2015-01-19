@@ -22,7 +22,12 @@ public class MainScript : MonoBehaviour {
 	bool choosing;
 	Instantiate generator;
 	bool more;
+<<<<<<< HEAD
 	bool stuff;
+=======
+	public float looktime;
+	Text livestext;
+>>>>>>> FETCH_HEAD
 
 	// Use this for initialization
 	void Start () {
@@ -35,11 +40,11 @@ public class MainScript : MonoBehaviour {
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		q.text = "";
-		//livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
-		time = timersc.count;;
+		livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
+		time = timersc.count;
 		level = 1;
 		lives = 3;
-		//livestext.text = "";//lives.ToString ();
+		livestext.text = "Lives:" + lives.ToString ();
 		state = 0;
 		
 	}
@@ -76,6 +81,7 @@ public class MainScript : MonoBehaviour {
 		choosing = false;
 		timersc.started = false;
 		generator.clearShapes ();
+		livestext.text = "Lives:" + lives.ToString ();
 	}
 	
 	// Update is called once per frame
@@ -111,6 +117,7 @@ public class MainScript : MonoBehaviour {
 			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
+		looktime = (float) newQuestion.creationRatio * 6;
 		state = 1;
 	}
 	
@@ -119,7 +126,7 @@ public class MainScript : MonoBehaviour {
 			falling = true;
 			timer0 = Time.time;
 		}
-		if (Time.time - timer0 > 3){
+		if (Time.time - timer0 > looktime){
 			falling = false;
 			state = 2;
 		}
