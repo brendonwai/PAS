@@ -95,7 +95,7 @@ public class MainScript : MonoBehaviour {
 	}	
 	
 	void question(){
-		Question newQuestion = QG.getQuestion(10);
+		Question newQuestion = QG.getQuestion(level);
 		if (newQuestion.quantity == "more") {
 			more = true;
 		} 
