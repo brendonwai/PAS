@@ -32,10 +32,6 @@ public class MainScript : MonoBehaviour {
 	Text livestext;
 	multiplayerResults result;
 
-	public GameObject starSpawner;
-	ShootingStar shootingStar;
-	bool starSpawned;
-
 	// Use this for initialization
 	void Start () {
 		choice = -1;
@@ -52,7 +48,6 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		level = 1;
 		state = 0;
-		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 		looktime = 5f;
 	}
 	
@@ -138,12 +133,6 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void displayBlockFall(){
-		if (level % 2 == 0 && !starSpawned) {
-			shootingStar.starFactory();
-			starSpawned = true;
-		}
-		if (starSpawned && level % 2 != 0)
-						starSpawned = false;
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
