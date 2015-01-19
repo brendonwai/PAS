@@ -4,6 +4,7 @@ using System.Collections;
 public class Play : MonoBehaviour {
 
 	public GameObject audioSource;
+	public GameObject audioSource2;
 
 	public void waitLoad(){
 		InvokeRepeating ("load", 0.5f, 0);
@@ -37,6 +38,13 @@ public class Play : MonoBehaviour {
 	}
 	public void Song(){
 		AudioSource sfx = audioSource.GetComponent<AudioSource> ();
+		sfx.Play ();
+		//System.Media.SoundPlayer player = new System.Media.SoundPlayer ();
+		//player.SoundLocation = "/Sound/Select_Menu.wav";
+		//player.Play ();
+	}
+	public void Sound2(){
+		AudioSource sfx = audioSource2.GetComponent<AudioSource> ();
 		sfx.Play ();
 		//System.Media.SoundPlayer player = new System.Media.SoundPlayer ();
 		//player.SoundLocation = "/Sound/Select_Menu.wav";

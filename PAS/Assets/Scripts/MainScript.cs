@@ -31,11 +31,13 @@ public class MainScript : MonoBehaviour {
 	public float looktime;
 	Text livestext;
 	multiplayerResults result;
+	Play sound;
 
 	// Use this for initialization
 	void Start () {
 		choice = -1;
 		choice2 = -1;
+		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
@@ -166,10 +168,12 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		if (time > 0) {
 						if (choice > -1 && p1 == false) {
+				sound.Song ();
 								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
 										if (more == true) {
 												if (choice == 0) {
 														c1 = true;
+							sound.Song ();
 												} else {
 														c1 = false;
 												}
@@ -200,6 +204,7 @@ public class MainScript : MonoBehaviour {
 						}
 						//player2
 						if (choice2 > -1 && p2 == false) {
+				sound.Song ();
 								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
 										if (more == true) {
 												if (choice2 == 0) {

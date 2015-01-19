@@ -24,7 +24,11 @@ public class SingleMain : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
+<<<<<<< HEAD
 	int starLevel;
+=======
+	Play sound;
+>>>>>>> 0b114622f5c62b9815f08a36172e1e30af9cd27f
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
@@ -35,6 +39,7 @@ public class SingleMain : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		choice = -1;
+		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
@@ -76,8 +81,12 @@ public class SingleMain : MonoBehaviour {
 	void nextLevel(bool correct){
 		level += 1;
 		lvl.uplvl ();
-		if (correct)
-			lvl.upscore (5);
+		if (correct) {
+						sound.Song ();
+						lvl.upscore (5);
+				} else {
+			sound.Sound2 ();
+				}
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
