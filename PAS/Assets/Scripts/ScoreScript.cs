@@ -9,6 +9,7 @@ public class ScoreScript : MonoBehaviour {
 	string defaulttext = "Level ";
 	public Text lvlText;
 	public Text scoreText;
+	public Text scoreText2;
 	int level;
 	public int score;
 	public int score2;
@@ -21,12 +22,12 @@ public class ScoreScript : MonoBehaviour {
 
 	public void upscore(int newScore){
 		score += newScore;
-		scoreText.text = "Score " + score.ToString () + "Score2 " + score2.ToString ();
+		scoreText.text = "Player1 " + score.ToString ();
 	}
 
 	public void upscore2(int newScore){
 		score2 += newScore;
-		scoreText.text = "Score " + score.ToString () + "Score2 " + score2.ToString ();
+		scoreText2.text = "Player2 " + score2.ToString ();
 	}
 
 
@@ -35,11 +36,13 @@ public class ScoreScript : MonoBehaviour {
 		score = 0;
 		score2 = 0;
 		scoreText = GameObject.Find ("ScoreText").GetComponent<Text> ();
+		scoreText2 = GameObject.Find ("ScoreText2").GetComponent<Text> ();
 		mainobj = GameObject.Find ("MainObject").GetComponent<MainScript> ();
 		level = mainobj.level;
 		lvlText = GetComponent<Text> ();
 		lvlText.text = defaulttext + level.ToString ();
-		scoreText.text = "Score " + score.ToString () + "Score2 " + score2.ToString ();
+		scoreText.text = "Player1 " + score.ToString ();
+		scoreText2.text = "Player2 " + score2.ToString ();
 	}
 	
 	// Update is called once per frame
