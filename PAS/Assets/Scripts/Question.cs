@@ -28,25 +28,9 @@ public class QuestionGenerator{
 		string randomShape = null;
 		string randomQuantity;
 		double ratio = 1 / (1 + Math.Pow (Math.E, (level + 6) / 10)) + 0.5;		
-		if (level < 4) {
-			randomQuantity = quantities [r.Next(quantities.Length)];
-			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
-		} else if (level < 7) {
-			randomQuantity = quantities [r.Next (quantities.Length)];
-			switch (r.Next (2)) {
-			case 0:
-				randomShape = shapes [r.Next (shapes.Length)]; 
-				return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
-			case 1:
-				randomColor = colors [r.Next (colors.Length)]; 
-				return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
-
-			}
-		} else {
-			randomQuantity = quantities [r.Next (quantities.Length)];
-			randomShape = shapes [r.Next (shapes.Length)];
-			randomColor = colors [r.Next (colors.Length)]; 
-		}
+		randomQuantity = quantities [r.Next (quantities.Length)];
+		randomShape = shapes [r.Next (shapes.Length)];
+		randomColor = colors [r.Next (colors.Length)]; 
 		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
 	} 
 }
