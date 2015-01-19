@@ -27,7 +27,7 @@ public class SingleMain : MonoBehaviour {
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
-	Explosion explosion;
+	//Explosion explosion;
 	bool starSpawned;
 	bool gotStar;
 	
