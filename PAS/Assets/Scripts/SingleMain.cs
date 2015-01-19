@@ -26,7 +26,7 @@ public class SingleMain : MonoBehaviour {
 	Text livestext;
 	int starLevel = 3;
 	Play sound;
-	multiplayerResults results;
+	multiplayerResults result;
 	
 	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
@@ -256,7 +256,7 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void GameOver(){
-		results.setWinner ("Game Over");
+		result.setWinner ("Game Over");
 		Application.LoadLevel ("GameOver");
 	}
 	
