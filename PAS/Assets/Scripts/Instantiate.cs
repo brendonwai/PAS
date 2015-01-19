@@ -31,6 +31,8 @@ public class Instantiate : MonoBehaviour {
 
 	private ObjectTally tally;
 
+	public bool gameOverMode;
+
 	//Imitate row this script will get from tally or whatever
 	/*
 	private string[] col1 = {"Circle", "Red"};
@@ -53,17 +55,57 @@ public class Instantiate : MonoBehaviour {
 	{
 		spawnPoints = new GameObject[]{spawnPoint1, spawnPoint2, spawnPoint3, spawnPoint4, spawnPoint5, spawnPoint6, spawnPoint7, spawnPoint8};
 
-		tally = GameObject.FindGameObjectWithTag("Tally").GetComponent<ObjectTally>();
+		if(!gameOverMode)
+			tally = GameObject.FindGameObjectWithTag("Tally").GetComponent<ObjectTally>();
 
 		spawnRound = cubeCount;
 		SpawnNew ();
 
 	}
+
+	string ranShape()
+	{
+		int ranNum = Random.Range(0,3);
+		string shape = "";
+
+		if (ranNum == 0)
+			shape = "circle";
+		if (ranNum == 1)
+			shape = "square";
+		if (ranNum == 2)
+			shape = "triangle";
+
+
+		return shape;
+
+	}
+
+	string ranColor()
+	{
+		int ranNum = Random.Range(0,5);
+		string color = "";
+		
+		if (ranNum == 0)
+			color = "red";
+		if (ranNum == 0)
+			color = "blue";
+		if (ranNum == 0)
+			color = "green";
+		if (ranNum == 3)
+			color = "yellow";
+		if (ranNum == 4)
+			color = "purple";
+
+		return color;
+
+	}
+
 	void SpawnNew() {
 
 		//[ ["Circle","Red"], ["Square","Blue"], ...] eight string arrays in total, the first four are the
 		//in the row on the left, rest is for the right
 
+		List<string[]> row = new List<string[]>();
 
 		if(spawnRound>1)
 		{
@@ -73,7 +115,18 @@ public class Instantiate : MonoBehaviour {
 			//row1[0,1] bottom left object's color
 			//row1[1,0] right of the top object
 
-			List<string[]> row = tally.getObjectRow();
+
+			if(!gameOverMode)
+				row = tally.getObjectRow();
+			else
+			{
+				for (int i = 0; i < 8; i++)
+				{
+					row.Add(new string[]{ranShape(),ranColor()});
+				}
+
+			}
+
 
 			for (int i = 0; i < 8; i++)
 			{
@@ -195,7 +248,9 @@ public class Instantiate : MonoBehaviour {
 			if(Time.time > (lastSpawn + spawnInterval))
 			{
 				SpawnNew ();
-				spawnRound--;
+
+				if (!gameOverMode)
+				    spawnRound--;
 
 				//Debug.Log(spawnRound);
 
