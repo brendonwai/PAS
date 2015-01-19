@@ -25,8 +25,9 @@ public class SingleMain : MonoBehaviour {
 	public float looktime;
 	Text livestext;
 	
-	public GameObject starSpawner;
+	public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
+	//Explosion explosion;
 	bool starSpawned;
 	bool gotStar;
 	
@@ -133,7 +134,8 @@ public class SingleMain : MonoBehaviour {
 		if (Input.GetKey ("space") && level % 2 == 0 && gotStar == false){
 				gotStar = true;
 				lvl.upscore (5);
-				shootingStar.destroyStar();
+				Vector3 lastPos = shootingStar.destroyStar();
+				//explosion.explosionFactory(lastPos);
 		}
 		if (falling == false) {
 			falling = true;
