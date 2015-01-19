@@ -19,14 +19,17 @@ public class ShootingStar : MonoBehaviour {
 		//lastForce = Mathf.Sin (argument) * 500;
 	}
 	public void starFactory() {
-		shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
-		shootingStar.rigidbody2D.AddForce (Vector3.right * 400);
+		GameObject shootingStar2 = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
+		shootingStar2.rigidbody2D.AddForce (Vector3.right * 400);
 	}
-	public void destroyStar() {
+	public Vector3 destroyStar() {
+		Vector3 lastPos = new Vector3 ();
 		foreach (GameObject shape in GameObject.FindGameObjectsWithTag("ShootingStar"))
 		{
+			lastPos = shape.transform.position;
 			Debug.Log (shape);
 			Object.Destroy(shape);
 		}
+		return lastPos;
 	}
 }
