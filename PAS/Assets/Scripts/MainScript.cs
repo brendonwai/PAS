@@ -47,6 +47,7 @@ public class MainScript : MonoBehaviour {
 		livestext.text = "Lives " + lives.ToString ();
 		state = 0;
 		shootingStar = starSpawner.GetComponent<ShootingStar> ();
+		looktime = 5f;
 	}
 	
 	void dimLite(){
@@ -82,6 +83,9 @@ public class MainScript : MonoBehaviour {
 		timersc.started = false;
 		generator.clearShapes ();
 		livestext.text = "Lives " + lives.ToString ();
+		if (looktime > 3) {
+			looktime -= 0.1f;
+			}
 	}
 	
 	// Update is called once per frame
@@ -117,8 +121,6 @@ public class MainScript : MonoBehaviour {
 			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
 		string temp =newQuestion.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
-		looktime = (float) newQuestion.creationRatio * 6;
-		Debug.Log (newQuestion.creationRatio);
 		state = 1;
 	}
 	
