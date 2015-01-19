@@ -30,6 +30,7 @@ public class MainScript : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
+	multiplayerResults result;
 
 	public GameObject starSpawner;
 	ShootingStar shootingStar;
@@ -39,6 +40,7 @@ public class MainScript : MonoBehaviour {
 	void Start () {
 		choice = -1;
 		choice2 = -1;
+		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
@@ -81,6 +83,12 @@ public class MainScript : MonoBehaviour {
 			lvl.upscore (5);
 		if (correct2)
 			lvl.upscore2 (5);
+		c1 = false;
+		c2 = false;
+		p1 = false;
+		p2 = false;
+		choice = -1;
+		choice2 = -1;
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
@@ -149,13 +157,13 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void guess(){
-		if (Input.GetKey("a"))
+		if (Input.GetKey("a") && p1 == false)
 			choice = 0;
-		if (Input.GetKey("d"))
+		if (Input.GetKey("d") && p1 == false)
 			choice = 1;
-		if (Input.GetKey("left"))
+		if (Input.GetKey("left") && p2 == false)
 			choice2 = 0;
-		if (Input.GetKey("right"))
+		if (Input.GetKey("right") && p2 == false)
 			choice2 = 1;
 		
 		if (choosing == false) {
@@ -237,7 +245,7 @@ public class MainScript : MonoBehaviour {
 						}
 				}
 		else {
-			if (level > 10 && lvl.score != lvl.score2)
+			if (level >= 10 && lvl.score != lvl.score2)
 				GameOver ();
 			else{
 				nextLevel (c1,c2);
@@ -246,6 +254,10 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void GameOver(){
+		if (lvl.score > lvl.score2)
+						result.setWinner ("Player 1");
+				else
+						result.setWinner ("Player 2");
 		Application.LoadLevel ("GameOver");
 	}
 	
