@@ -47,12 +47,8 @@ public class MainScript : MonoBehaviour {
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		q.text = "";
-		livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		time = timersc.count;
 		level = 1;
-		lives = 3;
-		lives2 = 3;
-		livestext.text = "Lives " + lives.ToString() + "Lives2" + lives2.ToString ();
 		state = 0;
 		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 		looktime = 5f;
@@ -70,13 +66,13 @@ public class MainScript : MonoBehaviour {
 		}
 	}
 	
-	public void LeftButton(){
-		choice =  0;
-	}
-	
-	public void RightButton(){
-		choice =  1;
-	}
+//	public void LeftButton(){
+//		choice =  0;
+//	}
+//	
+//	public void RightButton(){
+//		choice =  1;
+//	}
 
 	void nextLevel(bool correct1, bool correct2){
 		level += 1;
@@ -92,7 +88,6 @@ public class MainScript : MonoBehaviour {
 		choosing = false;
 		timersc.started = false;
 		generator.clearShapes ();
-		livestext.text = "Lives " + lives.ToString () + "Lives2" +  lives2.ToString ();
 		if (looktime > 3) {
 			looktime -= 0.1f;
 			}
@@ -173,21 +168,19 @@ public class MainScript : MonoBehaviour {
 		timersc.StartTimer ();
 		time = timersc.count;
 		if (time > 0) {
-						if (choice > -1 && p1 == false && lives > 0) {
+						if (choice > -1 && p1 == false) {
 								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
 										if (more == true) {
 												if (choice == 0) {
 														c1 = true;
 												} else {
 														c1 = false;
-														lives--;
 												}
 										} else {
 												if (choice == 1) {
 														c1 = true;
 												} else {
 														c1 = false;
-							lives--;
 												}
 										}
 								} else {
@@ -196,14 +189,12 @@ public class MainScript : MonoBehaviour {
 														c1 = true;
 												} else {
 														c1 = false;
-							lives--;
 												}
 										} else {
 												if (choice == 0) {
 														c1 = true;
 												} else {
 														c1 = false;
-							lives--;
 												}
 										}
 								}
@@ -211,21 +202,19 @@ public class MainScript : MonoBehaviour {
 								choice = -1;
 						}
 						//player2
-						if (choice2 > -1 && p2 == false && lives2 > 0) {
+						if (choice2 > -1 && p2 == false) {
 								if (tally.GetComponent<ObjectTally> ().LeftMore == true) {
 										if (more == true) {
 												if (choice2 == 0) {
 														c2 = true;
 												} else {
 														c2 = false;
-							lives2--;
 												}
 										} else {
 												if (choice2 == 1) {
 														c2 = true;
 												} else {
 														c2 = false;
-							lives2--;
 												}
 										}
 								} else {
@@ -234,14 +223,12 @@ public class MainScript : MonoBehaviour {
 														c2 = true;
 												} else {
 														c2 = false;
-							lives2--;
 												}
 										} else {
 												if (choice2 == 0) {
 														c2 = true;
 												} else {
 														c2 = false;
-							lives2--;
 												}
 										}
 								}
@@ -250,19 +237,9 @@ public class MainScript : MonoBehaviour {
 						}
 				}
 		else {
-			if (lives <= 0 && lives2 <= 0)
+			if (level > 10 && lvl.score != lvl.score2)
 				GameOver ();
 			else{
-				if (p1 == false){
-					lives--;
-				}
-				if (p2 == false){
-					lives2--;
-				}
-			if (lives > 0)
-					p1 = false;
-			if (lives2 > 0)
-					p2 = false;
 				nextLevel (c1,c2);
 			}
 		}
