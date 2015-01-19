@@ -15,4 +15,7 @@ public class Play : MonoBehaviour {
 	public void HowToPlay (){
 		Application.LoadLevel ("HowToPlay");
 	}
+	public void loadSinglePlayer() {
+		Application.LoadLevel("SinglerPlayer");
+	}
 }
