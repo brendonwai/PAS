@@ -129,6 +129,8 @@ public class SingleMain : MonoBehaviour {
 			shootingStar.starFactory();
 			starSpawned = true;
 		}
+		if (starSpawned)
+			starSpawned = false;
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
