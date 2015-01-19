@@ -24,7 +24,10 @@ public class MainScript : MonoBehaviour {
 	bool more;
 	public float looktime;
 	Text livestext;
-	ShootingStar ss;
+
+	public GameObject starSpawner;
+	ShootingStar shootingStar;
+	bool starSpawned;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +46,7 @@ public class MainScript : MonoBehaviour {
 		lives = 3;
 		livestext.text = "Lives " + lives.ToString ();
 		state = 0;
-		
+		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 	}
 	
 	void dimLite(){
@@ -120,8 +123,10 @@ public class MainScript : MonoBehaviour {
 	}
 	
 	void displayBlockFall(){
-		//if (level % 5 == 0) {
-		//	}
+		if (level % 2 == 0 && !starSpawned) {
+			shootingStar.starFactory();
+			starSpawned = true;
+		}
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
