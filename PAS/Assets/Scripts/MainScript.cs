@@ -139,7 +139,7 @@ public class MainScript : MonoBehaviour {
 	
 	void displayBlockFall(){
 		if (level % 2 == 0 && !starSpawned) {
-		//	shootingStar.starFactory();
+			shootingStar.starFactory();
 			starSpawned = true;
 		}
 		if (starSpawned && level % 2 != 0)
