@@ -20,7 +20,7 @@ public class ShootingStar : MonoBehaviour {
 	}
 	public void starFactory() {
 		GameObject shootingStar2 = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
-		shootingStar2.rigidbody2D.AddForce (Vector3.right * 500);
+		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 500);
 	}
 	public Vector3 destroyStar() {
 		Vector3 lastPos = new Vector3 ();

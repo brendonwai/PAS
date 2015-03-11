@@ -65,7 +65,7 @@ public class SingleMain : MonoBehaviour {
 	
 	void litLite(){
 		if (lite.intensity > 0.5) {
-			light.intensity -= 0.25f;
+			GetComponent<Light>().intensity -= 0.25f;
 		}
 	}
 	
