@@ -27,10 +27,10 @@ public class QuestionGenerator{
 		string randomColor = null;
 		string randomShape = null;
 		string randomQuantity;
-		double ratio = .55-(1/(1+e^((x+50)/50)));		
+		//double ratio = .55-(1/(1+e^((x+50)/50)));		
 		randomQuantity = quantities [r.Next (quantities.Length)];
 		randomShape = shapes [r.Next (shapes.Length)];
 		randomColor = colors [r.Next (colors.Length)]; 
-		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio);
+		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, 1);
 	} 
 }
