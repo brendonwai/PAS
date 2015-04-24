@@ -1,6 +1,16 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ObjectTally.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Question.cs" Line="30" Column="33" />
+      <File FileName="Assets/Scripts/ObjectTally.cs" Line="7" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+>>>>>>> origin/master
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
