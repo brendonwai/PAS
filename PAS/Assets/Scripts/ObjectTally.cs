@@ -64,7 +64,7 @@ public class ObjectTally : MonoBehaviour {
 	//Adds required to color/shape to the corresponding list pool and calls
 	//ListAppender function
 	public void Load(string[] input){
-		spawnRatio = System.Convert.ToDouble (input[0]);
+		spawnRatio = Random.Range(.4f,.8f);
 		if(input[1]!=null){
 			requiredColor = input[1];
 			colorPool.Add (input[1]);
@@ -91,7 +91,7 @@ public class ObjectTally : MonoBehaviour {
 				shapePool.Add (PickShape());
 			}
 		}
-		int num = (int)Mathf.Round(rows * columns * Random.Range (.4f, .8f));
+		int num = (int)Mathf.Round(rows * columns * (float)System.Convert.ToDouble (input[0]));
 		ListAppender (Random.Range (1,3), num);
 	}
 	
