@@ -204,9 +204,8 @@ public class ObjectTally : MonoBehaviour {
 	string PickColor(){
 
 		int poolCount = 0;
-		int needed = 1;
 		string colorselected = "NULL";
-		while (poolCount < needed) {
+		while (poolCount < 1) {
 			colorselected = possibleColors [Random.Range (0, possibleColors.Length)];
 			if (!(requiredColor.Equals(colorselected))){
 				poolCount++;
@@ -220,9 +219,8 @@ public class ObjectTally : MonoBehaviour {
 	string PickShape(){
 
 		int poolCount = 0;
-		int needed = 1;
 		string shapeselected = "NULL";
-		while (poolCount < needed) {
+		while (poolCount < 1) {
 			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length)];
 			if (!(requiredShape.Equals(shapeselected))){
 				poolCount++;
