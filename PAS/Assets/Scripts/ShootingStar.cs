@@ -8,19 +8,23 @@ public class ShootingStar : MonoBehaviour {
 	//public float randomScalar;
 	public float lastForce;
 	void Start() {
-		//randomScalar = r.Next (10)/100;
-		//shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
-		//shootingStar.rigidbody2D.AddForce (Vector3.right * 400);
+		/*
+		randomScalar = r.Next (10)/100;
+		shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
+		shootingStar.rigidbody2D.AddForce (Vector3.right * 400);
+		*/
 	}
 	void Update() {
-		//shootingStar.rigidbody2D.velocity = new Vector2 (1, 0).normalized*10;
-		//float argument = Time.realtimeSinceStartup * 100;
-		//shootingStar.rigidbody.AddForce(Vector3.up * (Mathf.Sin (argument) * 500 - (2*lastForce)));
-		//lastForce = Mathf.Sin (argument) * 500;
+		/*
+		shootingStar.rigidbody2D.velocity = new Vector2 (1, 0).normalized*10;
+		float argument = Time.realtimeSinceStartup * 100;
+		shootingStar.rigidbody.AddForce(Vector3.up * (Mathf.Sin (argument) * 500 - (2*lastForce)));
+		lastForce = Mathf.Sin (argument) * 500;
+		*/
 	}
 	public void starFactory() {
-		GameObject shootingStar2 = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
-		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 500);
+		GameObject shootingStar2 = Instantiate (shootingStar, new Vector3(-10,-0.3f,r.Next (-15,-5)), Quaternion.identity) as GameObject;
+		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 10000);
 	}
 	public Vector3 destroyStar() {
 		Vector3 lastPos = new Vector3 ();
