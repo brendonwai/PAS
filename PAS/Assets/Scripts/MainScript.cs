@@ -19,7 +19,9 @@ public class MainScript : MonoBehaviour {
 	Text shownQuestion;
 	string lvlquestion;
 	DisableButton LB;
+	DisableButton TLB;
 	DisableButton RB;
+	DisableButton TRB;
 	public GameObject tally;
 	float timer0;
 	bool falling;
@@ -41,8 +43,10 @@ public class MainScript : MonoBehaviour {
 		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
+		TLB = GameObject.Find ("TopLeftButton").GetComponent <DisableButton> ();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
+		TRB = GameObject.Find ("TopRightButton").GetComponent <DisableButton> ();
 		lite = GameObject.Find ("Directional light").GetComponent<Light>();
 		lvl = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
@@ -65,6 +69,23 @@ public class MainScript : MonoBehaviour {
 		if (lite.intensity > 0.5) {
 			GetComponent<Light>().intensity -= 0.25f;
 		}
+	}
+
+	// Chooses the answer for touch controls
+	public void TopLeftButton(){
+		choice1 =  0;
+	}
+
+	public void LeftButton(){
+		choice1 = 1;
+	}
+
+	public void TopRightButton(){
+		choice2 =  1;
+	}
+
+	public void RightButton(){
+		choice2 = 0;
 	}
 
 	void nextLevel(bool correct1, bool correct2){
@@ -95,7 +116,9 @@ public class MainScript : MonoBehaviour {
 		//state to tell what the game needs to do next
 		state = 0;
 		//cleans up buttons
+		TLB.changestate ();
 		LB.changestate ();
+		TRB.changestate ();
 		RB.changestate ();
 		//clears question
 		shownQuestion.text = "";
@@ -177,7 +200,8 @@ public class MainScript : MonoBehaviour {
 		}
 
 	}
-	
+
+
 	void guess(){
 		//assigns input to keys
 		if (Input.GetKey("a") && p1 == false)
@@ -192,7 +216,9 @@ public class MainScript : MonoBehaviour {
 		//flips to turn on buttons
 		if (choosing == false) {
 			choosing = true;
+			TLB.changestate();
 			LB.changestate ();
+			TRB.changestate();
 			RB.changestate ();
 		}
 
