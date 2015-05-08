@@ -23,8 +23,8 @@ public class ShootingStar : MonoBehaviour {
 		*/
 	}
 	public void starFactory() {
-		GameObject shootingStar2 = Instantiate (shootingStar, new Vector3(-10,-0.3f,r.Next (-15,-5)), Quaternion.identity) as GameObject;
-		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 10000);
+		GameObject shootingStar2 = Instantiate (shootingStar,new Vector3(-15,(float)(r.NextDouble () * 5 - 5),0), Quaternion.identity) as GameObject;
+		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 8000);
 	}
 	public Vector3 destroyStar() {
 		Vector3 lastPos = new Vector3 ();
