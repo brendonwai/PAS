@@ -11,12 +11,14 @@ public class MainScript : MonoBehaviour {
 	bool p2;
 	bool c2;
 	TimerScript timersc;
+	TimerScript timersc2;
 	int time;
 	Light lite;
 	int state;
 	int choice1;
 	int choice2;
 	Text shownQuestion;
+	Text shownQuestion2;
 	string lvlquestion;
 	DisableButton LB;
 	DisableButton TLB;
@@ -50,13 +52,16 @@ public class MainScript : MonoBehaviour {
 		lite = GameObject.Find ("Directional light").GetComponent<Light>();
 		lvl = GameObject.Find ("LevelText").GetComponent <ScoreScript> ();
 		timersc = GameObject.Find ("TimerText").GetComponent <TimerScript> ();
+		timersc2 = GameObject.Find ("TimerText2").GetComponent <TimerScript> ();
 		shownQuestion = GameObject.Find ("QuestionText").GetComponent <Text> ();
+		shownQuestion2 = GameObject.Find ("QuestionText2").GetComponent <Text> ();
+		shownQuestion.text = "";
 		shownQuestion.text = "";
 
 		time = timersc.count;
 		level = 1;
 		state = 0;
-		looktime = 10f;
+		looktime = 5f;
 	}
 	
 	void dimLite(){
@@ -122,10 +127,12 @@ public class MainScript : MonoBehaviour {
 		RB.changestate ();
 		//clears question
 		shownQuestion.text = "";
+		shownQuestion2.text = "";
 		//allow no one to choose answer
 		choosing = false;
 		//turn off timer
 		timersc.started = false;
+		timersc2.started = false;
 		//clear blocks on the screen for restart
 		generator.clearShapes ();
 	}
@@ -231,7 +238,9 @@ public class MainScript : MonoBehaviour {
 		//starts timer and outputs the question similtaneously 
 		lvl.lvlText.text = "";
 		shownQuestion.text = lvlquestion;
+		shownQuestion2.text = lvlquestion;
 		timersc.StartTimer ();
+		timersc2.StartTimer ();
 		time = timersc.count;
 		CheckTimer (time);
 	}

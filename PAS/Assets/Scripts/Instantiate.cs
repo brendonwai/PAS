@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 
 public class Instantiate : MonoBehaviour {
+	public bool reverseGravity = false;
 	public GameObject Square;
 	public GameObject Circle;
 	public GameObject Triangle;
@@ -156,6 +157,8 @@ public class Instantiate : MonoBehaviour {
                     shapeColor = ShapeColor.BLANK;
 
 				gameObject1 = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
+				if(reverseGravity && i > 3)
+					gameObject1.GetComponent<Rigidbody2D>().gravityScale *= -1;
 				PASColor colorSetter = gameObject1.GetComponent<PASColor>();
 				colorSetter.setColor(shapeColor);
 			}

@@ -1,16 +1,14 @@
 ﻿<Properties>
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
-=======
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ObjectTally.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/Question.cs" Line="30" Column="33" />
-      <File FileName="Assets/Scripts/ObjectTally.cs" Line="7" Column="26" />
+      <File FileName="Assets\Scripts\Play.cs" Line="55" Column="1" />
+      <File FileName="Assets\Scripts\Instantiate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MainScript.cs" Line="135" Column="28" />
+      <File FileName="Assets\Scripts\TimerScript.cs" Line="9" Column="13" />
+      <File FileName="Assets\Scripts\MultiTimer.cs" Line="19" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
->>>>>>> origin/master
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
