@@ -34,7 +34,6 @@ public class ShootingStar : MonoBehaviour {
 		foreach (GameObject shape in GameObject.FindGameObjectsWithTag("ShootingStar"))
 		{
 			lastPos = shape.transform.position;
-			Debug.Log (shape);
 			Object.Destroy(shape);
 		}
 		return lastPos;
