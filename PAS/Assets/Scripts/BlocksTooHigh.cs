@@ -20,7 +20,6 @@ public class BlocksTooHigh : MonoBehaviour {
 	{
 		if (other.tag == "Shape")
 		{
-			//Debug.Log ("HEYENTER");
 			blockStopper.isTrigger = true;
 			triggerIsActive = true;
 			removeStopperTimestamp = removeStopperDuration + Time.time;
@@ -31,7 +30,6 @@ public class BlocksTooHigh : MonoBehaviour {
 	{
 		if (other.tag == "Shape")
 		{
-			//Debug.Log ("HEYSTAY");
 			blockStopper.isTrigger = true;
 			triggerIsActive = true;
 			removeStopperTimestamp = removeStopperDuration + Time.time;
@@ -43,7 +41,6 @@ public class BlocksTooHigh : MonoBehaviour {
 	{
 		if (Time.time > removeStopperTimestamp && triggerIsActive == true)
 		{
-			//Debug.Log("yep");
 			blockStopper.isTrigger = false;
 			triggerIsActive = false;
 		}

@@ -52,7 +52,7 @@
      <Compile Include="Assets\Scripts\Instantiate.cs" />
      <Compile Include="Assets\Scripts\LightFlash.cs" />
      <Compile Include="Assets\Scripts\LoadMainMenu.cs" />
-     <Compile Include="Assets\Scripts\MainScript.cs" />
+     <Compile Include="Assets\Scripts\MulitMain.cs" />
      <Compile Include="Assets\Scripts\ObjectTally.cs" />
      <Compile Include="Assets\Scripts\PASColor.cs" />
      <Compile Include="Assets\Scripts\Play.cs" />

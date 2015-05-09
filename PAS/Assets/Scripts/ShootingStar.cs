@@ -5,33 +5,35 @@ using System.Collections.Generic;
 public class ShootingStar : MonoBehaviour {
 	public GameObject shootingStar;
 	System.Random r = new System.Random();
-	//public float randomScalar;
 	public float lastForce;
+	bool isUp = true;
+	int counter = 0; //To simulate adding force every n number of seconds.
+
 	void Start() {
-		/*
-		randomScalar = r.Next (10)/100;
-		shootingStar = Instantiate (shootingStar, transform.position, Quaternion.identity) as GameObject;
-		shootingStar.rigidbody2D.AddForce (Vector3.right * 400);
-		*/
 	}
+
 	void Update() {
-		/*
-		shootingStar.rigidbody2D.velocity = new Vector2 (1, 0).normalized*10;
-		float argument = Time.realtimeSinceStartup * 100;
-		shootingStar.rigidbody.AddForce(Vector3.up * (Mathf.Sin (argument) * 500 - (2*lastForce)));
-		lastForce = Mathf.Sin (argument) * 500;
-		*/
+		if (Time.time % .5 < .1)
+			counter++;
+		if(counter % 5 == 0) {
+			//Random movement simulation
+			if(isUp)
+				shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.up * 300);
+			else
+				shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.down * 300);
+			isUp = !isUp;
+		}
 	}
 	public void starFactory() {
-		GameObject shootingStar2 = Instantiate (shootingStar,new Vector3(-15,(float)(r.NextDouble () * 5 - 5),0), Quaternion.identity) as GameObject;
-		shootingStar2.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 8000);
+		shootingStar = Instantiate (shootingStar,new Vector3(-15,(float)(r.NextDouble () * 5 - 5),0), Quaternion.identity) as GameObject;
+		shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 4000);
+		shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.up * 100);
 	}
 	public Vector3 destroyStar() {
 		Vector3 lastPos = new Vector3 ();
 		foreach (GameObject shape in GameObject.FindGameObjectsWithTag("ShootingStar"))
 		{
 			lastPos = shape.transform.position;
-			Debug.Log (shape);
 			Object.Destroy(shape);
 		}
 		return lastPos;
