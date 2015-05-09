@@ -3,9 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class MainScript : MonoBehaviour {
-    public GameObject directionalLight;
-    LightFlash lightFlash;
-
 	QuestionGenerator QG = new QuestionGenerator();
 	ScoreScript lvl;
 	public int level;
@@ -43,7 +40,6 @@ public class MainScript : MonoBehaviour {
 		choice2 = -1;
 
 		//grabs all the objects, and sets them to variables
-        lightFlash = directionalLight.GetComponent<LightFlash>();
 		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();

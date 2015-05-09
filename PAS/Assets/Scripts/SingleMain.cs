@@ -3,10 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SingleMain : MonoBehaviour {
-    public GameObject directionalLight;
-    LightFlash lightFlash;
-    
-    QuestionGenerator QG = new QuestionGenerator();
+	QuestionGenerator QG = new QuestionGenerator();
 	SingleScore lvl;
 	public int level;
 	public int lives;
@@ -39,8 +36,11 @@ public class SingleMain : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
+		//initializes choice
 		choice = -1;
-        lightFlash = directionalLight.GetComponent<LightFlash>();
+
+		//creates all objects
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
@@ -52,12 +52,14 @@ public class SingleMain : MonoBehaviour {
 		q = GameObject.Find ("QuestionText").GetComponent <Text> ();
 		q.text = "";
 		livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
+		shootingStar = starSpawner.GetComponent<ShootingStar> ();
+
+		//initializes lives, levels and timer
 		time = timersc.count;
 		level = 1;
 		lives = 3;
 		livestext.text = "Lives " + lives.ToString ();
 		state = 0;
-		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 		looktime = 5f;
 	}
 	
@@ -82,87 +84,97 @@ public class SingleMain : MonoBehaviour {
 	}
 	
 	void nextLevel(bool correct){
+		increaseScore (correct);
+		clearScreen ();
+		livestext.text = "Lives " + lives.ToString ();
+		if (looktime > 3) {
+			looktime -= 0.1f;
+		}
+	}
+
+	void increaseScore(bool correct){
 		level += 1;
 		lvl.uplvl ();
-		if (correct) 
-        {
-            lightFlash.flashCorrect();
-		    sound.Song ();
+		if (correct) {
+			sound.Song ();
 			lvl.upscore (5);
-		} 
-        else 
-        {
-            lightFlash.flashIncorrect();
+		}else
 			sound.Sound2 ();
-		}
+	}
+	void clearScreen(){
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();
 		q.text = "";
 		choosing = false;
 		timersc.started = false;
-		generator.clearShapes ();
-		livestext.text = "Lives " + lives.ToString ();
-		if (looktime > 3) {
-			looktime -= 0.1f;
-		}
+		generator.clearShapes ();		
 	}
-	
 	// Update is called once per frame
 	void Update () {
-		if (state == 0) {
+		switch(state){
+		//first stage that makes the question
+		case 0:
 			question ();
-		}
-		if (state == 1) {
+			break;
+		//tells script to show blocks
+		case 1: 
 			displayBlockFall ();
-		}
-		if (state == 2) {
+			break;
+		//takes the answer from the user
+		case 2:
 			guess ();
+			break;
 		}
 	}	
 	
 	void question(){
 		Question newQuestion = QG.getQuestion(level);
-		if (newQuestion.quantity == "more") {
+		checkMoreLess (newQuestion);
+		generateQuestion (newQuestion);		
+	}
+
+	void checkMoreLess (Question currentQ){
+		if (currentQ.quantity == "more")
 			more = true;
-		} 
-		else {
+		else
 			more = false;
+	}
+
+	void generateQuestion(Question currentQ){
+		if (currentQ.color == null && currentQ.shape == null)
+			lvlquestion = "Which side has " + currentQ.quantity + " objects?";
+		else if (currentQ.color == null && currentQ.shape != null) 
+			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.shape + "s?";
+		else if (currentQ.shape == null && currentQ.color != null)
+			lvlquestion = "Which side has " + currentQ.quantity + " " +  currentQ.color + "s?";
+		else {	// Change the color of the font
+			lvlquestion = "Which side has <size=45><color=black>" + currentQ.quantity;
+			if (currentQ.color == "blue")
+				lvlquestion = lvlquestion + "</color> <color=#00ffffff>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "red")
+				lvlquestion = lvlquestion + "</color> <color=red>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "green")
+				lvlquestion = lvlquestion + "</color> <color=#A9F5A9>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "purple")
+				lvlquestion = lvlquestion + "</color> <color=#8258FA>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "yellow")
+				lvlquestion = lvlquestion + "</color> <color=yellow>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
 		}
-		
-		
-		if (newQuestion.color == null && newQuestion.shape == null)
-			lvlquestion = "Which side has " + newQuestion.quantity + " objects?";
-		else if (newQuestion.color == null && newQuestion.shape != null) 
-			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.shape + "s?";
-		else if (newQuestion.shape == null && newQuestion.color != null)
-			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + "s?";
-		else 
-			lvlquestion = "Which side has " + newQuestion.quantity + " " + newQuestion.color + " " + newQuestion.shape + "s?";
-		string temp =newQuestion.creationRatio.ToString();
-		tally.SendMessage ("Load",new string[]{temp, newQuestion.color, newQuestion.shape});
+		string temp = currentQ.ratio.ToString();
+		string numColors = currentQ.numColors.ToString ();
+		string numShapes = currentQ.numShapes.ToString ();
+		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape, numColors, numShapes});
 		state = 1;
 	}
-	
+
 	void displayBlockFall(){
-		if (level % 5 == 0) {
-			System.Random r = new System.Random();
-			this.starLevel = r.Next (level, level + 5);
-		}
-		if (level == starLevel && !starSpawned) {
-				shootingStar.starFactory ();
-				starSpawned = true;
-		}
-		if (Input.GetKey ("space") && (level == starLevel) && gotStar == false){
-				gotStar = true;
-				lvl.upscore (5);
-				Vector3 lastPos = shootingStar.destroyStar();
-				//explosion.explosionFactory(lastPos);
-		}
+		startStar ();
 		if (falling == false) {
 			falling = true;
 			timer0 = Time.time;
 		}
+
 		if (Time.time - timer0 > looktime){
 			if (starSpawned && level % 2 != 0)
 				starSpawned = false;
@@ -170,8 +182,23 @@ public class SingleMain : MonoBehaviour {
 			falling = false;
 			state = 2;
 		}
-		//litLite ();
-		//dimLite ();
+	}
+	void startStar(){
+		if (level % 5 == 0) {
+			System.Random r = new System.Random();
+			this.starLevel = r.Next (level, level + 5);
+		}
+		
+		if (level == starLevel && !starSpawned) {
+			shootingStar.starFactory ();
+			starSpawned = true;
+		}
+		if (Input.GetKey ("space") && (level == starLevel) && gotStar == false){
+			gotStar = true;
+			lvl.upscore (5);
+			Vector3 lastPos = shootingStar.destroyStar();
+			//explosion.explosionFactory(lastPos);
+		}
 	}
 	
 	void guess(){
@@ -189,72 +216,20 @@ public class SingleMain : MonoBehaviour {
 			LB.changestate ();
 			RB.changestate ();
 		}
+		startQuestion ();
+	}
+	void startQuestion(){
 		lvl.lvlText.text = "";
 		q.text = lvlquestion;
 		timersc.StartTimer ();
 		time = timersc.count;
+		checkTimer (time);
+	}
+
+	void checkTimer (int time){
 		if (time > 0) {
-			if (choice > -1){
-				if ( tally.GetComponent<ObjectTally>().LeftMore== true){
-					if (more == true){
-						if (choice == 0){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else 
-								lives--;
-							nextLevel(false);
-						}
-					}
-					else{
-						if (choice == 1){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver();
-							else{
-								lives--;
-								nextLevel(false);
-							}
-						}
-					}
-				}
-				else{
-					if (more == true){
-						if (choice == 1){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else {
-								lives--;
-								nextLevel(false);
-							}
-						}
-					}
-					else{
-						if (choice == 0){
-							nextLevel (true);
-						}
-						else{
-							if (lives == 1)
-								GameOver ();
-							else{ 
-								lives--;
-								nextLevel (false);
-							}
-						}
-					}
-				}
-				choice = -1;
-				//choice is passed here
-			}
-		}
-		else {
+			checkPlayerChoice();
+		}else {
 			if (lives == 1)
 				GameOver ();
 			else{
@@ -263,12 +238,43 @@ public class SingleMain : MonoBehaviour {
 			}
 		}
 	}
-	
+	void checkPlayerChoice(){
+		//gets if the player said the correct answer
+		if (choice > -1){
+			if ( tally.GetComponent<ObjectTally>().LeftMore== true){
+				if (more == true)
+					checkLives (ref lives, 0);
+				else
+					checkLives (ref lives, 1);
+			}
+			else{
+				if (more == true)
+					checkLives (ref lives, 1);
+				else
+					checkLives (ref lives, 0);
+			}
+		choice = -1;
+		//choice is passed here
+		}
+	}
 	void GameOver(){
 		result.setWinner ("Game Over");
 		Application.LoadLevel ("GameOver");
 	}
-	
+
+	void checkLives (ref int currentLives, int cmp){
+		//checks if the player ran out of lives, and if moves to the next level is answer is correct
+		if (choice == cmp){
+			nextLevel (true);
+		}else{
+			if (currentLives == 1)
+				GameOver ();
+			else{ 
+				currentLives--;
+				nextLevel (false);
+			}
+		}
+	}
 }
 
 

@@ -10,6 +10,7 @@ public class ShootingStar : MonoBehaviour {
 	int counter = 0; //To simulate adding force every n number of seconds.
 
 	void Start() {
+		
 	}
 
 	void Update() {
@@ -26,7 +27,8 @@ public class ShootingStar : MonoBehaviour {
 	}
 	public void starFactory() {
 		shootingStar = Instantiate (shootingStar,new Vector3(-15,(float)(r.NextDouble () * 5 - 5),0), Quaternion.identity) as GameObject;
-		shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 4000);
+		shootingStar.GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "star";
+		shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.right * 400);
 		shootingStar.GetComponent<Rigidbody2D>().AddForce (Vector3.up * 100);
 	}
 	public Vector3 destroyStar() {

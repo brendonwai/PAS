@@ -60,7 +60,7 @@ public class ObjectTally : MonoBehaviour {
 
 	//Call this function from Question.cs to input requirements from question
 	//i.e: required shapes and colors
-	//input format ["spawnratio","required colors","required shapes"]
+	//input format ["spawnratio","required colors","required shapes","color number","shape number"]
 	//Adds required to color/shape to the corresponding list pool and calls
 	//ListAppender function
 	public void Load(string[] input){
@@ -69,6 +69,10 @@ public class ObjectTally : MonoBehaviour {
 		LeftPool.Clear();
 		RightPool.Clear();
 		spawnRatio = System.Convert.ToDouble (input [0]);
+		colorNum=int.Parse(input[3]);
+		shapeNum=int.Parse(input[4]);
+		Debug.Log(colorNum);
+		Debug.Log(shapeNum);
 		if(input[1]!=null){
 			requiredColor = input[1];
 			colorPool.Add (input[1]);
@@ -117,18 +121,6 @@ public class ObjectTally : MonoBehaviour {
 			ListRow.Add (RightPool[toRemove]);
 			RightPool.RemoveAt(toRemove);
 		}
-		if(LeftPool.Count==0){
-			Debug.Log("Leftpool cleared!");
-			for(int i=0;i<RightPool.Count;i++){
-				Debug.Log(RightPool[i][0]+"  "+RightPool[i][1]);
-			}
-		}
-		if(RightPool.Count==0){
-			Debug.Log("Rightpool cleared!");
-			for(int i=0;i<LeftPool.Count;i++){
-				Debug.Log(LeftPool[i][0]+"  "+LeftPool[i][1]);
-			}
-		}
 		return ListRow;
 	}
 
@@ -167,8 +159,6 @@ public class ObjectTally : MonoBehaviour {
 			}
 			LeftMore=false;
 		}
-		Debug.Log(LeftPool.Count);
-		Debug.Log(RightPool.Count);
 	}
 
 
