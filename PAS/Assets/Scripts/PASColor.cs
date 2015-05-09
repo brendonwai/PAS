@@ -25,7 +25,7 @@ public class PASColor : MonoBehaviour {
 	{
 		renderer1 = GetComponent<SpriteRenderer>();
 
-		if (color == ShapeColor.Red)
+		if (color == ShapeColor.Red || color == ShapeColor.BLANK)
 		{
 			renderer1.color = new Color(210f/255f,83f/255f,65f/255f,1f);
 		}
