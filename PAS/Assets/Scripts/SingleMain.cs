@@ -148,8 +148,20 @@ public class SingleMain : MonoBehaviour {
 			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.shape + "s?";
 		else if (currentQ.shape == null && currentQ.color != null)
 			lvlquestion = "Which side has " + currentQ.quantity + " " +  currentQ.color + "s?";
-		else 
-			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + " " + currentQ.shape + "s?";
+		else {	// Change the color of the font
+			lvlquestion = "Which side has <size=45><color=black>" + currentQ.quantity;
+			if (currentQ.color == "blue")
+				lvlquestion = lvlquestion + "</color> <color=#00ffffff>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "red")
+				lvlquestion = lvlquestion + "</color> <color=red>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "green")
+				lvlquestion = lvlquestion + "</color> <color=#A9F5A9>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "purple")
+				lvlquestion = lvlquestion + "</color> <color=#8258FA>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			else if (currentQ.color == "yellow")
+				lvlquestion = lvlquestion + "</color> <color=yellow>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+			
+		}
 		string temp = currentQ.creationRatio.ToString();
 		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape});
 		state = 1;
