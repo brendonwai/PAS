@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -66,8 +66,8 @@ public class ObjectTally : MonoBehaviour {
 	public void Load(string[] input){
 		colorPool.Clear();
 		shapePool.Clear();
-		requiredColor=null;
-		requiredShape=null;
+		LeftPool.Clear();
+		RightPool.Clear();
 		spawnRatio = System.Convert.ToDouble (input [0]);
 		if(input[1]!=null){
 			requiredColor = input[1];
@@ -96,12 +96,6 @@ public class ObjectTally : MonoBehaviour {
 			}
 		}
 		int num = (int)Mathf.Round(rows * columns * (float)spawnRatio);
-		for(int i=0;i<colorPool.Count;i++){
-			Debug.Log(colorPool[i]);
-		}
-		for(int y=0;y<shapePool.Count;y++){
-			Debug.Log(shapePool[y]);
-		}
 		ListAppender (Random.Range (1,3), num);
 	}
 	
@@ -123,6 +117,18 @@ public class ObjectTally : MonoBehaviour {
 			ListRow.Add (RightPool[toRemove]);
 			RightPool.RemoveAt(toRemove);
 		}
+		if(LeftPool.Count==0){
+			Debug.Log("Leftpool cleared!");
+			for(int i=0;i<RightPool.Count;i++){
+				Debug.Log(RightPool[i][0]+"  "+RightPool[i][1]);
+			}
+		}
+		if(RightPool.Count==0){
+			Debug.Log("Rightpool cleared!");
+			for(int i=0;i<LeftPool.Count;i++){
+				Debug.Log(LeftPool[i][0]+"  "+LeftPool[i][1]);
+			}
+		}
 		return ListRow;
 	}
 
@@ -131,36 +137,13 @@ public class ObjectTally : MonoBehaviour {
 	//read from Load function. GetObjectRow will then randomly pick objects
 	//from each pool for generating the final row lists
 	void ListAppender(int choice,int requiredAmount){
-		if (choice==1){
-			if(requiredColor!=null && requiredShape!=null){
-				for(int i=0;i<requiredAmount;i++){
-					LeftPool.Add (new string[]{requiredShape,requiredColor});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					RightPool.Add (new string[]{requiredShape,requiredColor});
-				}
-			}else if(requiredColor!=null){
-				for(int i=0;i<requiredAmount;i++){
-					LeftPool.Add (new string[]{PickShapeFromPool(),requiredColor});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					RightPool.Add (new string[]{PickShapeFromPool(),requiredColor});
-				}
-			}else if(requiredShape!=null){
-				for(int i=0;i<requiredAmount;i++){
-					LeftPool.Add (new string[]{requiredShape,PickColorFromPool()});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					RightPool.Add (new string[]{requiredShape,PickColorFromPool()});
-				}
-			}else{
-				for(int i=0;i<requiredAmount;i++){
-					LeftPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					RightPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
-				}
+		if (choice==1){		
+			for(int i=0;i<requiredAmount;i++){
+				LeftPool.Add (new string[]{requiredShape,requiredColor});
 			}
+			for(int i=0;i<requiredAmount*spawnRatio;i++){
+				RightPool.Add (new string[]{requiredShape,requiredColor});
+			}		
 			for(int i=0;i<rows*columns-requiredAmount;i++){
 				LeftPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
 			}
@@ -170,34 +153,11 @@ public class ObjectTally : MonoBehaviour {
 			LeftMore=true;
 		}
 		if(choice==2){
-			if(requiredColor!=null && requiredShape!=null){
-				for(int i=0;i<requiredAmount;i++){
-					RightPool.Add (new string[]{requiredShape,requiredColor});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					LeftPool.Add (new string[]{requiredShape,requiredColor});
-				}
-			}else if(requiredColor!=null){
-				for(int i=0;i<requiredAmount;i++){
-					RightPool.Add (new string[]{PickShapeFromPool(),requiredColor});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					LeftPool.Add (new string[]{PickShapeFromPool(),requiredColor});
-				}
-			}else if(requiredShape!=null){
-				for(int i=0;i<requiredAmount;i++){
-					RightPool.Add (new string[]{requiredShape,PickColorFromPool()});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					LeftPool.Add (new string[]{requiredShape,PickColorFromPool()});
-				}
-			}else{
-				for(int i=0;i<requiredAmount;i++){
-					RightPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
-				}
-				for(int i=0;i<requiredAmount*spawnRatio;i++){
-					LeftPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
-				}
+			for(int i=0;i<requiredAmount;i++){
+				RightPool.Add (new string[]{requiredShape,requiredColor});
+			}
+			for(int i=0;i<requiredAmount*spawnRatio;i++){
+				LeftPool.Add (new string[]{requiredShape,requiredColor});
 			}
 			for(int i=0;i<rows*columns-requiredAmount;i++){
 				RightPool.Add (new string[]{PickShapeFromPool(),PickColorFromPool()});
@@ -207,7 +167,25 @@ public class ObjectTally : MonoBehaviour {
 			}
 			LeftMore=false;
 		}
+		Debug.Log(LeftPool.Count);
+		Debug.Log(RightPool.Count);
 	}
+
+
+
+
+
+
+
+//--------------------------------nothing wrong beyond this point--------------------------
+
+
+
+
+
+
+
+
 
 	//No need to call this function from elsewhere
 	//Support function that randomly picks a color from possibleColor pool

@@ -20,7 +20,7 @@ public class Instantiate : MonoBehaviour {
 	public GameObject spawnPoint6 = null;
 	public GameObject spawnPoint7 = null;
 	public GameObject spawnPoint8 = null;
-	public int cubeCount = 8;
+	public int cubeCount = 7;
 	private double spawnInterval;
 	private float lastSpawn;
 	private GameObject gameObject;
@@ -159,71 +159,6 @@ public class Instantiate : MonoBehaviour {
 				PASColor colorSetter = gameObject.GetComponent<PASColor>();
 				colorSetter.setColor(shapeColor);
 			}
-
-			
-			
-			/*// column 2
-			if(row1[1,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[1,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[1,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint2.transform.position, Quaternion.identity) as GameObject;}
-
-			// column 3 
-			if(row1[2,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint3.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[2,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint3.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[2,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint3.transform.position, Quaternion.identity) as GameObject;}
-
-			if(row1[3,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint4.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[3,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint4.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[3,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint4.transform.position, Quaternion.identity) as GameObject;}
-
-			if(row1[4,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint5.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[4,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint5.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[4,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint5.transform.position, Quaternion.identity) as GameObject;}
-
-			if(row1[5,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint6.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[5,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint6.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[5,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint6.transform.position, Quaternion.identity) as GameObject;}
-
-			if(row1[6,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint7.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[6,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint7.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[6,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint7.transform.position, Quaternion.identity) as GameObject;}
-
-			if(row1[7,0]=="Circle")
-			{gameObject = Instantiate(Circle, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[7,0]=="Square")
-			{gameObject = Instantiate(Square, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}
-			if(row1[7,0]=="Triangle")
-			{gameObject = Instantiate(Triangle, spawnPoint8.transform.position, Quaternion.identity) as GameObject;}*/
-
-			
-
-
-//			gameObject = Instantiate(Square, spawnPoint1.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint2.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint3.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint4.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint5.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint6.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint7.transform.position, Quaternion.identity) as GameObject;
-//		gameObject = Instantiate(Square, spawnPoint8.transform.position, Quaternion.identity) as GameObject;//
 
 		lastSpawn = Time.time;
 		spawnInterval = Random.Range(5,10)*rate;
