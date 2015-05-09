@@ -10,7 +10,7 @@ public class Play : MonoBehaviour {
 		InvokeRepeating ("load", 0.5f, 0);
 	}
 	public void load() {
-		Application.LoadLevel("SpawnScene");
+		Application.LoadLevel("MultiPlayer");
 	}
 	public void waitQuit(){
 		InvokeRepeating ("quit", 0.5f, 0);
