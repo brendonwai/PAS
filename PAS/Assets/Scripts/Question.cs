@@ -29,7 +29,7 @@ public class QuestionGenerator{
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
 		string randomColor = null, randomShape = null, randomQuantity = null;
-		int setRatioCount = .55-(1/(1+Math.Pow(Math.E,(level+50)/50))) * 28;	
+		int setRatioCount = (int)UnityEngine.Mathf.Round ((float)(.55-(1/(1+Math.Pow(Math.E,(level+50)/50))) * 28));	
 		randomQuantity = quantities [r.Next (quantities.Length)];
 		randomShape = shapes [r.Next (shapes.Length)];
 		randomColor = colors [r.Next (colors.Length)]; 

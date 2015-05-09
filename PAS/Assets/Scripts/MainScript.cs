@@ -183,7 +183,7 @@ public class MainScript : MonoBehaviour {
 			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + "s?";
 		else 
 			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + " " + currentQ.shape + "s?";
-		string temp = currentQ.creationRatio.ToString();
+		string temp = currentQ.ratioCount.ToString();
 		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape});
 		state = 1;
 	}

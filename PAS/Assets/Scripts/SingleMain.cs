@@ -162,7 +162,7 @@ public class SingleMain : MonoBehaviour {
 				lvlquestion = lvlquestion + "</color> <color=yellow>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
 			
 		}
-		string temp = currentQ.creationRatio.ToString();
+		string temp = currentQ.ratioCount.ToString();
 		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape});
 		state = 1;
 	}
