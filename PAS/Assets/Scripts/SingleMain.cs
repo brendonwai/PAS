@@ -3,7 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SingleMain : MonoBehaviour {
-	QuestionGenerator QG = new QuestionGenerator();
+    public GameObject directionalLight;
+    LightFlash lightFlash;
+    
+    QuestionGenerator QG = new QuestionGenerator();
 	SingleScore lvl;
 	public int level;
 	public int lives;
@@ -37,6 +40,7 @@ public class SingleMain : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		choice = -1;
+        lightFlash = directionalLight.GetComponent<LightFlash>();
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
 		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
@@ -80,12 +84,17 @@ public class SingleMain : MonoBehaviour {
 	void nextLevel(bool correct){
 		level += 1;
 		lvl.uplvl ();
-		if (correct) {
-						sound.Song ();
-						lvl.upscore (5);
-				} else {
+		if (correct) 
+        {
+            lightFlash.flashCorrect();
+		    sound.Song ();
+			lvl.upscore (5);
+		} 
+        else 
+        {
+            lightFlash.flashIncorrect();
 			sound.Sound2 ();
-				}
+		}
 		state = 0;
 		LB.changestate ();
 		RB.changestate ();

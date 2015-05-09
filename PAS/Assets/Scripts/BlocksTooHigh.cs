@@ -41,7 +41,6 @@ public class BlocksTooHigh : MonoBehaviour {
 
 	void Update()
 	{
-		Debug.Log (triggerIsActive);
 		if (Time.time > removeStopperTimestamp && triggerIsActive == true)
 		{
 			//Debug.Log("yep");
