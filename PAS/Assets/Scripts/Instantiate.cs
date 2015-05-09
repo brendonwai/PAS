@@ -23,7 +23,7 @@ public class Instantiate : MonoBehaviour {
 	public int cubeCount = 7;
 	private double spawnInterval;
 	private float lastSpawn;
-	private GameObject gameObject;
+	private GameObject gameObject1;
 	public GameObject rowGetter;
 	public float rate;
 	private int spawnRound;
@@ -155,8 +155,8 @@ public class Instantiate : MonoBehaviour {
                 else
                     shapeColor = ShapeColor.BLANK;
 
-				gameObject = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
-				PASColor colorSetter = gameObject.GetComponent<PASColor>();
+				gameObject1 = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
+				PASColor colorSetter = gameObject1.GetComponent<PASColor>();
 				colorSetter.setColor(shapeColor);
 			}
 
