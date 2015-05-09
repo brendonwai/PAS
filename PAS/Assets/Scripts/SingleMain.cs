@@ -161,7 +161,7 @@ public class SingleMain : MonoBehaviour {
 			else if (currentQ.color == "yellow")
 				lvlquestion = lvlquestion + "</color> <color=yellow>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
 		}
-		string temp = currentQ.ratioCount.ToString();
+		string temp = currentQ.ratio.ToString();
 		string numColors = currentQ.numColors.ToString ();
 		string numShapes = currentQ.numShapes.ToString ();
 		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape, numColors, numShapes});

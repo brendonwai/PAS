@@ -6,7 +6,8 @@ public struct Question{
 	public string shape;
 	public string color;
 	public string quantity;
-	public int numColors, numShapes, ratioCount;
+	public double ratio;
+	public int numColors, numShapes;
 }
 
 public class QuestionGenerator{
@@ -14,11 +15,11 @@ public class QuestionGenerator{
 	private static string[] colors = {"blue","red","green","purple","yellow"};
 	private static string[] shapes = {"circle","square","triangle"};
 
-	public Question createQuestion(Question question, string shape, string color, string quantity, int count, int level){
+	public Question createQuestion(Question question, string shape, string color, string quantity, double ratio, int level){
 		question.shape = shape;
 		question.color = color;
 		question.quantity = quantity;
-		question.ratioCount = count;
+		question.ratio = ratio;
 		int[] parameters = levelParameters (level);
 		question.numColors = parameters [0];
 		question.numShapes = parameters [1];
@@ -29,11 +30,11 @@ public class QuestionGenerator{
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
 		string randomColor = null, randomShape = null, randomQuantity = null;
-		int setRatioCount = (int)UnityEngine.Mathf.Round ((float)(.55-(1/(1+Math.Pow(Math.E,(level+50)/50))) * 28));	
+		double ratio = (.55-(1/(1+Math.Pow(Math.E,(level+50)/50))));
 		randomQuantity = quantities [r.Next (quantities.Length)];
 		randomShape = shapes [r.Next (shapes.Length)];
 		randomColor = colors [r.Next (colors.Length)]; 
-		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, setRatioCount, level);
+		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio, level);
 	} 
 
 	//Returns an array of size 2 = [number of colors, number of shapes] given the level. Color range of [2,5], shape range of [2,3].
