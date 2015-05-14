@@ -86,11 +86,11 @@ public class MainScript : MonoBehaviour {
 	}
 
 	public void TopRightButton(){
-		choice2 =  1;
+		choice2 =  0;
 	}
 
 	public void RightButton(){
-		choice2 = 0;
+		choice2 = 1;
 	}
 
 	void nextLevel(bool correct1, bool correct2){
