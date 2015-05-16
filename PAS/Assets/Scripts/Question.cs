@@ -11,7 +11,7 @@ public struct Question{
 }
 
 public class QuestionGenerator{
-	private static string[] quantities = {"more","less"};
+	private static string[] quantities = {"more","fewer"};
 	private static string[] colors = {"blue","red","green","purple","yellow"};
 	private static string[] shapes = {"circle","square","triangle"};
 
