@@ -22,6 +22,11 @@ public class SingleScore : MonoBehaviour {
 		score += newScore;
 		scoreText.text = "Score " + score.ToString ();
 	}
+
+    public int getScore()
+    {
+        return score;
+    }
 	
 	// Use this for initialization
 	void Start () {

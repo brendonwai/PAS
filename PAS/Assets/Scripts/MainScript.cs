@@ -56,7 +56,7 @@ public class MainScript : MonoBehaviour {
 		time = timersc.count;
 		level = 1;
 		state = 0;
-		looktime = 10f;
+		looktime = 5f;
 	}
 	
 	void dimLite(){
@@ -174,21 +174,34 @@ public class MainScript : MonoBehaviour {
 	}
 
 	//Outs question and stores it;
-	void generateQuestion (Question currentQ){
-		if (currentQ.color == null && currentQ.shape == null)
-			lvlquestion = "Which side has " + currentQ.quantity + " objects?";
-		else if (currentQ.color == null && currentQ.shape != null) 
-			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.shape + "s?";
-		else if (currentQ.shape == null && currentQ.color != null)
-			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + "s?";
-		else 
-			lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + " " + currentQ.shape + "s?";
-		string temp = currentQ.ratio.ToString();
-		string numColors = currentQ.numColors.ToString ();
-		string numShapes = currentQ.numShapes.ToString ();
-		tally.SendMessage ("Load",new string[]{temp, currentQ.color, currentQ.shape, numColors, numShapes});
-		state = 1;
-	}
+    void generateQuestion(Question currentQ)
+    {
+        if (currentQ.color == null && currentQ.shape == null)
+            lvlquestion = "Which side has " + currentQ.quantity + " objects?";
+        else if (currentQ.color == null && currentQ.shape != null)
+            lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.shape + "s?";
+        else if (currentQ.shape == null && currentQ.color != null)
+            lvlquestion = "Which side has " + currentQ.quantity + " " + currentQ.color + "s?";
+        else
+        {	// Change the color of the font
+            lvlquestion = "Which side has <size=45><color=black>" + currentQ.quantity;
+            if (currentQ.color == "blue")
+                lvlquestion = lvlquestion + "</color> <color=#00ffffff>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+            else if (currentQ.color == "red")
+                lvlquestion = lvlquestion + "</color> <color=red>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+            else if (currentQ.color == "green")
+                lvlquestion = lvlquestion + "</color> <color=#A9F5A9>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+            else if (currentQ.color == "purple")
+                lvlquestion = lvlquestion + "</color> <color=#8258FA>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+            else if (currentQ.color == "yellow")
+                lvlquestion = lvlquestion + "</color> <color=yellow>" + currentQ.color + "</color> " + currentQ.shape + "</size>s?";
+        }
+        string temp = currentQ.ratio.ToString();
+        string numColors = currentQ.numColors.ToString();
+        string numShapes = currentQ.numShapes.ToString();
+        tally.SendMessage("Load", new string[] { temp, currentQ.color, currentQ.shape, numColors, numShapes });
+        state = 1;
+    }
 
 	//shows falling blocks to the screen
 	void displayBlockFall(){
@@ -230,6 +243,7 @@ public class MainScript : MonoBehaviour {
 	void startQuestion (){
 		//starts timer and outputs the question similtaneously 
 		lvl.lvlText.text = "";
+
 		shownQuestion.text = lvlquestion;
 		timersc.StartTimer ();
 		time = timersc.count;

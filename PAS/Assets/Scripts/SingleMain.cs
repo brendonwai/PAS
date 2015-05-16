@@ -269,7 +269,7 @@ public class SingleMain : MonoBehaviour {
 		}
 	}
 	void GameOver(){
-		result.setWinner ("Game Over");
+		result.setWinner ("Game Over \nScore: " + lvl.getScore());
 		Application.LoadLevel ("GameOver");
 	}
 
