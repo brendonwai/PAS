@@ -6,7 +6,7 @@ public class ShootingStar : MonoBehaviour {
 	public GameObject shootingStar;
 	public float lastForce;
 
-	private float checkpointTime = 0, amplitude = 3.25f, omega = 6f, xScalar = 14;
+	private float checkpointTime = 0, amplitude = 2.8f, omega = 6f, xScalar = 14;
 
     GameObject cloneStar;
 	System.Random r = new System.Random();
