@@ -201,7 +201,7 @@ public class SingleMain : MonoBehaviour {
 		}
 		
 		if (level == starLevel && !starSpawned) {
-			shootingStar.starFactory ();
+			shootingStar.starFactory (level);
 			starSpawned = true;
 		}
 		if (Input.GetKey ("space") && (level == starLevel) && gotStar == false){

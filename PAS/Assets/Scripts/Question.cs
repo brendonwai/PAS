@@ -40,13 +40,13 @@ public class QuestionGenerator{
 	//Returns an array of size 2 = [number of colors, number of shapes] given the level. Color range of [2,5], shape range of [2,3].
 	private int[] levelParameters(int level) {
 		int[] parameters;
-		if(level < 3) {
+		if(level < 5) {
 			parameters = new int[]{2,2};
-		} else if (level < 6) {
+		} else if (level < 12) {
 			parameters = new int[]{3,2};
-		} else if(level < 12) {
-			parameters = new int[]{3,3};
 		} else if(level < 22) {
+			parameters = new int[]{3,3};
+		} else if(level < 40) {
 			parameters = new int[]{4,3};
 		} else
 			parameters = new int[]{5,3};
