@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ShootingStar : MonoBehaviour {
 	public GameObject shootingStar;
-	public float lastForce;
 
 	private float checkpointTime = 0, amplitude = 2.8f, omega = 6f, xScalar = 14;
 
