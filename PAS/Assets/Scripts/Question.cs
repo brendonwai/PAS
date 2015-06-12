@@ -37,15 +37,15 @@ public class QuestionGenerator{
 
 		double ratio;
 		if(level < thresholds[0]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[0])+50)/50))));
+			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[0])+50)/50f))));
 		} else if (level < thresholds[1]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[1])+50)/50))));
+			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[1])+50)/50f))));
 		} else if(level < thresholds[2]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[2])+50)/50))));
+			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[2])+50)/50f))));
 		} else if(level < thresholds[3]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[3])+50)/50))));
+			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[3])+50)/50f))));
 		} else
-			ratio = (.55-(1/(1+Math.Pow(Math.E,(level+50)/50))));
+			ratio = (.55-(1/(1+Math.Pow(Math.E,(level+50)/50f))));
 		return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio, level);
 	} 
 
