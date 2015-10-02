@@ -6,7 +6,7 @@ public struct Question{
 	public string shape;
 	public string color;
 	public string quantity;
-	public double ratio;
+    public double[] leftObjectRatios, rightObjectRatios;
 	public int numColors, numShapes;
 }
 
@@ -16,44 +16,27 @@ public class QuestionGenerator{
 	private static string[] shapes = {"circle","square","triangle"};
 	public int[] thresholds = {5,12,22,40}; // Artificial thresholds to add in shapes/colors/adjust ratio
 	public int shapeThreshold = 10; // The threshold at which questions will start asking different shape types 
-
-	private Question createQuestion(Question question, string shape, string color, string quantity, double ratio, int level){
-		question.shape = shape;
-		question.color = color;
-		question.quantity = quantity;
-		question.ratio = ratio;
-		int[] parameters = levelParameters (level);
-		question.numColors = parameters [0];
-		question.numShapes = parameters [1];
-		return question;
-	}
+    
 	// Returns the question and the win parameters, given some number of function parameters based on the difficulty.
 	// The returns a question's indexes for a predefined array in the form <question, color, shape, side,ratio>.
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
 		string randomColor = null, randomShape = null, randomQuantity = null;
 		randomQuantity = quantities [r.Next (quantities.Length)];
-		randomColor = colors [r.Next (colors.Length)]; 
+		randomColor = colors [r.Next (colors.Length)];
 
-		double ratio;
-		if(level < thresholds[0]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[0])+50)/50f))));
-		} else if (level < thresholds[1]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[1])+50)/50f))));
-		} else if(level < thresholds[2]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[2])+50)/50f))));
-		} else if(level < thresholds[3]) {
-			ratio = (.55-(1/(1+Math.Pow(Math.E,((level-thresholds[3])+50)/50f))));
-		} else
-			ratio = (.55-(1/(1+Math.Pow(Math.E,(level+50)/50f))));
+        int[] parameters = levelParameters(level); //0 #colors, 1 #shapes
+        int numColors = parameters[0], numShapes = parameters[1];
+        double[] leftRatios = new double[numColors * numShapes], rightRatios = new double[numColors * numShapes];
 
-		// If we have passed the shape level threshold, then discriminate shapes for the question - else, only colors.
-		if (level > shapeThreshold) {
-			randomShape = shapes [r.Next (shapes.Length)];
-			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio, level);
-		} else
-			return createQuestion (new Question (), randomShape, randomColor, randomQuantity, ratio, level);
-	} 
+        // If we have passed the shape level threshold, then discriminate shapes for the question - else, only colors.
+        if (level > shapeThreshold) {
+            randomShape = shapes[r.Next(shapes.Length)];
+            return new Question { shape = randomShape, color = randomColor, quantity = randomQuantity, leftObjectRatios = leftRatios };
+        } else {
+            return new Question { shape = null, color = randomColor, quantity = randomQuantity, rightObjectRatios = rightRatios };
+        }
+    } 
 
 	//Returns an array of size 2 = [number of colors, number of shapes] given the level. Color range of [2,5], shape range of [2,3].
 	private int[] levelParameters(int level) {
