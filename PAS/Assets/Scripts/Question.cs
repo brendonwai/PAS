@@ -26,9 +26,10 @@ public class QuestionGenerator{
 		randomColor = colors [r.Next (colors.Length)];
 
         int[] parameters = levelParameters(level); //0 #colors, 1 #shapes
-        int numColors = parameters[0], numShapes = parameters[1];
-        double[] leftRatios = new double[numColors * numShapes], rightRatios = new double[numColors * numShapes];
-
+        int numColors = parameters[0], numShapes = parameters[1], numObjects = numColors * numShapes;
+        double[][] sideRatios = fillSpawnPercentages(new double[numObjects], new double[numObjects],level,numObjects, randomQuantity);
+        double[] leftRatios = sideRatios[0], rightRatios = sideRatios[1];
+        
         // If we have passed the shape level threshold, then discriminate shapes for the question - else, only colors.
         if (level > shapeThreshold) {
             randomShape = shapes[r.Next(shapes.Length)];
@@ -54,4 +55,42 @@ public class QuestionGenerator{
 
 		return parameters;
 	}
+
+    // Given the level and number of objects, returns an array of minimum and maximum percentages.
+    // The returned array is of the form {minimum percentage, maximum percentage}.
+    private double[] findSpawnPercentages(int level, int objectCount) {
+        return new double[]{0.15,0.4};
+    }
+
+    // Given the arrays of spawn percentages for each side, fills them according to the bounded percentages.
+    // TODO - Associate winning objects to their percentages; turn these arrays into (K,V) pairings!
+    private double[][] fillSpawnPercentages(double[] leftSideRatios, double[] rightSideRatios, int level, int objectCount, string quantity) {
+        System.Random r = new System.Random();
+        double[] spawnPercentageBounds = findSpawnPercentages(level, objectCount);
+        double leftSum = 0, rightSum = 0;
+        for(int i = 0; i < objectCount; i++) {
+            if(i == objectCount - 1) {
+                double leftPercentage = r.Next((int)(spawnPercentageBounds[0] * 100), (int)(spawnPercentageBounds[1] * 100)) / 100,
+                    rightPercentage = spawnPercentageBounds[1] - leftPercentage;
+                leftSideRatios[i] = leftPercentage;
+                rightSideRatios[i] = rightPercentage;
+
+                leftSum += leftPercentage;
+                rightSum += rightPercentage;
+            } else {
+                leftSideRatios[i] = 1 - leftSum;
+                rightSideRatios[i] = 1 - rightSum;
+            }
+            
+            /*
+            if(quantity == "more" && ) {
+
+            } else if(quantity == "less" && ) {
+
+            }
+            */
+        }
+
+        return new double[][] {leftSideRatios, rightSideRatios};    
+    }
 }
