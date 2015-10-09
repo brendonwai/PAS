@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public struct Question{
@@ -92,5 +94,30 @@ public class QuestionGenerator{
         }
 
         return new double[][] {leftSideRatios, rightSideRatios};    
+    }
+
+    //Generates (K,V) pairs of the shapes (keys) and colors (shapes); every pair represents an object (e.g. blue circle).
+    private KeyValuePair<string,string>[] generateObjectPermutations(string[] colors, string[] shapes) {
+        KeyValuePair<string, string>[] objects;
+        if(colors.Length == 0) {
+            objects = new KeyValuePair<string, string>[shapes.Length];
+            for(int i = 0; i < objects.Length; i++) {
+                objects[i] = new KeyValuePair<string, string>(null, shapes[i]);
+            }
+            return objects;
+        }
+
+        objects = new KeyValuePair<string, string>[colors.Length * shapes.Length];
+        System.Random r = new System.Random();
+        colors = colors.OrderBy(x => r.Next()).ToArray();
+        shapes = shapes.OrderBy(x => r.Next()).ToArray();
+
+        for(int i = 0; i < colors.Length; i++) {
+            for(int j = 0; j < shapes.Length; j++) {
+                objects[i * j] = new KeyValuePair<string, string>(colors[i], shapes[j]);
+            }
+        }
+
+        return objects;
     }
 }
