@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class ObjectTally : MonoBehaviour {
@@ -40,9 +39,7 @@ public class ObjectTally : MonoBehaviour {
 	private List<string> shapePool=new List<string>();
 	//same as above for colors
 	private List<string> colorPool =new List<string>();
-	//ratio of amount of required shape/color combo object on the left
-	//compared to the right
-	private double spawnRatio;
+
 	//the complete list of objects to be generated on the left side
 	private List<string[]> LeftPool=new List<string[]>();
 	//same as above for the right side
@@ -60,26 +57,23 @@ public class ObjectTally : MonoBehaviour {
 
 	//Call this function from Question.cs to input requirements from question
 	//i.e: required shapes and colors
-	//input format ["spawnratio","required colors","required shapes","color number","shape number"]
+	//input format ["required colors","required shapes","color number","shape number""left object ratios","right object ratios"]
 	//Adds required to color/shape to the corresponding list pool and calls
 	//ListAppender function
-	public void Load(string[] input){
+	public void Load(Question question){
 		colorPool.Clear();
 		shapePool.Clear();
 		LeftPool.Clear();
 		RightPool.Clear();
-		spawnRatio = System.Convert.ToDouble (input [0]);
-		colorNum=int.Parse(input[3]);
-		shapeNum=int.Parse(input[4]);
-		Debug.Log(colorNum);
-		Debug.Log(shapeNum);
-		if(input[1]!=null){
-			requiredColor = input[1];
-			colorPool.Add (input[1]);
+        colorNum = question.numColors;
+        shapeNum = question.numShapes;
+		if(question.color != null){
+			requiredColor = question.color;
+			colorPool.Add (question.color);
 		}
-		if(input[2]!=null){
-			shapePool.Add (input[2]);
-			requiredShape = input[2];
+		if(question.shape != null){
+			shapePool.Add (question.shape);
+			requiredShape = question.shape;
 		}
 		if(colorNum>1){
 			int c = 1;
