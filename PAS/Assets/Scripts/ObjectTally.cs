@@ -67,33 +67,15 @@ public class ObjectTally : MonoBehaviour {
 		RightPool.Clear();
         colorNum = question.numColors;
         shapeNum = question.numShapes;
-		if(question.color != null){
-			requiredColor = question.color;
-			colorPool.Add (question.color);
-		}
-		if(question.shape != null){
-			shapePool.Add (question.shape);
-			requiredShape = question.shape;
-		}
-		if(colorNum>1){
-			int c = 1;
-			if (requiredColor==null){
-				c=0;
-			}
-			for (int i=0; i < colorNum - c;i++){
-				colorPool.Add(PickColor());
-			}
-		}
-		if(shapeNum>1){
-			int s=1;
-			if (requiredShape==null){
-				s=0;
-			}
-			for(int y=0;y<shapeNum-s;y++){
-				shapePool.Add (PickShape());
-			}
-		}
-		int num = (int)Mathf.Round(rows * columns * (float)spawnRatio);
+
+        requiredColor = question.color;
+        requiredColor = question.shape;
+
+        foreach (KeyValuePair<string,string> shapeObject in question.objects) {
+            colorPool.Add(shapeObject.Key);
+            shapePool.Add(shapeObject.Value);
+        }
+
 		ListAppender (Random.Range (1,3), num);
 	}
 	
@@ -156,19 +138,7 @@ public class ObjectTally : MonoBehaviour {
 	}
 
 
-
-
-
-
-
 //--------------------------------nothing wrong beyond this point--------------------------
-
-
-
-
-
-
-
 
 
 	//No need to call this function from elsewhere

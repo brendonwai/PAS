@@ -21,24 +21,21 @@ public class QuestionGenerator{
 	// The returns a question's indexes for a predefined array in the form <question, color, shape, side,ratio>.
 	public Question getQuestion(int level) {
 		System.Random r = new System.Random();
-		string randomColor = null, randomShape = null, randomQuantity = null;
-		randomQuantity = quantities [r.Next (quantities.Length)];
-		randomColor = colors [r.Next (colors.Length)];
-
         int[] parameters = levelParameters(level); //0 #colors, 1 #shapes
         int numColors = parameters[0], numShapes = parameters[1], numObjects = numColors * numShapes;
+        KeyValuePair<string, string>[] shapeObjects = generateObjectPermutations(numColors, numShapes);
+
+        string randomColor = shapeObjects[r.Next(shapeObjects.Length)].Key, 
+            randomShape = shapeObjects[r.Next(shapeObjects.Length)].Value, randomQuantity = quantities[r.Next(quantities.Length)];
+
         double[][] sideRatios = fillSpawnPercentages(new double[numObjects], new double[numObjects],level,numObjects, randomQuantity);
         double[] leftRatios = sideRatios[0], rightRatios = sideRatios[1];
 
-        KeyValuePair<string, string>[] shapeObjects = generateObjectPermutations(numColors, numShapes);
-
         // If we have passed the shape level threshold, then discriminate shapes for the question - else, only colors.
-        if (level > shapeThreshold) {
-            randomShape = shapes[r.Next(shapes.Length)];
+        if (level > shapeThreshold)
             return new Question { shape = randomShape, color = randomColor, quantity = randomQuantity, leftObjectRatios = leftRatios, objects = shapeObjects };
-        } else {
+        else
             return new Question { shape = null, color = randomColor, quantity = randomQuantity, rightObjectRatios = rightRatios, objects = shapeObjects };
-        }
     } 
 
 	//Returns an array of size 2 = [number of colors, number of shapes] given the level. Color range of [0,5], shape range of [2,3].
