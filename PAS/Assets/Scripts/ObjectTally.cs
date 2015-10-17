@@ -69,14 +69,17 @@ public class ObjectTally : MonoBehaviour {
         shapeNum = question.numShapes;
 
         requiredColor = question.color;
-        requiredColor = question.shape;
+        requiredShape = question.shape;
 
-        foreach (KeyValuePair<string,string> shapeObject in question.objects) {
-            colorPool.Add(shapeObject.Key);
-            shapePool.Add(shapeObject.Value);
+        for(int i = 0; i < question.objects.Length; i++) {
+            if (question.objects[i].Key == requiredColor && question.objects[i].Value == requiredShape)
+                LeftMore = question.leftObjectRatios[i] > question.rightObjectRatios[i] ? true : false;
+            colorPool.Add(question.objects[i].Key);
+            shapePool.Add(question.objects[i].Value);
         }
 
-		fillObjectPools();
+        int sideObjectCount = rows * columns;
+		fillObjectPools(question.objects, question.leftObjectRatios, question.rightObjectRatios, sideObjectCount);
 	}
 	
 		
@@ -104,73 +107,13 @@ public class ObjectTally : MonoBehaviour {
 	//Appends item to left and right pool according to the requirements 
 	//read from Load function. GetObjectRow will then randomly pick objects
 	//from each pool for generating the final row lists
-	void fillObjectPools(){
-        //Adjust leftMore false/true
+	void fillObjectPools(KeyValuePair<string, string>[] objects, double[] leftRatios, double[] rightRatios, int sideCount) {
+        for(int i = 0; i < objects.Length; i++) {
+            for (int leftIndex = 0; leftIndex < leftRatios[i] * sideCount; leftIndex++)
+                LeftPool.Add(new string[] {objects[i].Key,objects[i].Value});
+
+            for(int rightIndex = 0; rightIndex < rightRatios[i]* sideCount; rightIndex++)
+                RightPool.Add(new string[] { objects[i].Key, objects[i].Value });
+        }
 	}
-
-
-//--------------------------------nothing wrong beyond this point--------------------------
-
-
-	//No need to call this function from elsewhere
-	//Support function that randomly picks a color from possibleColor pool
-	string PickColor(){
-
-		int poolCount = 0;
-		string colorselected = "NULL";
-		while (poolCount < 1) {
-			colorselected = possibleColors [Random.Range (0, possibleColors.Length)];
-			if (!(requiredColor.Equals(colorselected))){
-				poolCount++;
-			}
-		}
-		return colorselected;
-	}
-
-	//No need to call this function from elsewhere
-	//same as the function above for shapes
-	string PickShape(){
-
-		int poolCount = 0;
-		string shapeselected = "NULL";
-		while (poolCount < 1) {
-			shapeselected = possibleShapes [Random.Range (0, possibleShapes.Length)];
-			if (!(requiredShape.Equals(shapeselected))){
-				poolCount++;
-			}
-		}
-		return shapeselected;
-	}
-
-	//No need to call this function from elsewhere
-	//Support function that randomly picks a color from ColorPool to include in either left
-	//or right pool
-	string PickColorFromPool(){
-		int poolCount = 0;
-		int needed = 1;
-		string colorselected = "NULL";
-		while (poolCount < needed) {
-			colorselected = colorPool [Random.Range (0, colorPool.Count)];
-			if (!(requiredColor.Equals(colorselected))){
-				poolCount++;
-			}
-		}
-		return colorselected;
-	}
-
-	//No need to call this function from elsewhere
-	//same as the function above for shapes
-	string PickShapeFromPool(){
-		int poolCount = 0;
-		int needed = 1;
-		string shapeselected = "NULL";
-		while (poolCount < needed) {
-			shapeselected = shapePool [Random.Range (0, shapePool.Count)];
-			if (!(requiredShape.Equals(shapeselected))){
-				poolCount++;
-			}
-		}
-		return shapeselected;
-	}
-
 }
