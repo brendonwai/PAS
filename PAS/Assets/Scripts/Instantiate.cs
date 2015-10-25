@@ -87,9 +87,9 @@ public class Instantiate : MonoBehaviour {
 		
 		if (ranNum == 0)
 			color = "red";
-		if (ranNum == 0)
+		if (ranNum == 1)
 			color = "blue";
-		if (ranNum == 0)
+		if (ranNum == 2)
 			color = "green";
 		if (ranNum == 3)
 			color = "yellow";
