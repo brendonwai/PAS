@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 public struct Question {
     public string shape;
@@ -122,8 +120,6 @@ public class QuestionGenerator {
 
         objects = new KeyValuePair<string, string>[numColors * numShapes];
         System.Random r = new System.Random();
-        colors = colors.OrderBy(x => r.Next()).ToArray();
-        shapes = shapes.OrderBy(x => r.Next()).ToArray();
 
         for (int i = 0; i < numColors; i++) {
             for (int j = 0; j < numShapes; j++) {
