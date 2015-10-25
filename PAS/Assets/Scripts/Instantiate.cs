@@ -68,13 +68,11 @@ public class Instantiate : MonoBehaviour {
 		int ranNum = Random.Range(0,3);
 		string shape = "";
 
-		if (ranNum == 0)
-			shape = "circle";
-		if (ranNum == 1)
-			shape = "square";
-		if (ranNum == 2)
-			shape = "triangle";
-
+        switch(ranNum) {
+            case 0: shape = "circle"; break;
+            case 1: shape = "square"; break;
+            case 2: shape = "triangle"; break;
+        }
 
 		return shape;
 
@@ -84,17 +82,14 @@ public class Instantiate : MonoBehaviour {
 	{
 		int ranNum = Random.Range(0,5);
 		string color = "";
-		
-		if (ranNum == 0)
-			color = "red";
-		if (ranNum == 0)
-			color = "blue";
-		if (ranNum == 0)
-			color = "green";
-		if (ranNum == 3)
-			color = "yellow";
-		if (ranNum == 4)
-			color = "purple";
+
+        switch(ranNum) {
+            case 0: color = "red"; break;
+            case 1: color = "blue"; break;
+            case 2: color = "green"; break;
+            case 3: color = "yellow"; break;
+            case 4: color = "purple"; break;
+        }
 
 		return color;
 
@@ -107,7 +102,7 @@ public class Instantiate : MonoBehaviour {
 
 		List<string[]> row = new List<string[]>();
 
-		if(spawnRound>1)
+        if (spawnRound>1)
 		{
 			//Get a fresh row from object tally here
 
@@ -127,33 +122,27 @@ public class Instantiate : MonoBehaviour {
 
 			}
 
-
-			for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
 			{
 
 				GameObject shapeType = null;
 				ShapeColor shapeColor = ShapeColor.BLANK;
 
-                if (row[i][0] == "circle")
-                    shapeType = Circle;
-                else if (row[i][0] == "square")
-                    shapeType = Square;
-                else if (row[i][0] == "triangle")
-                    shapeType = Triangle;
-                else
-                    shapeType = Circle;
-                if (row[i][1] == "red")
-                    shapeColor = ShapeColor.Red;
-                else if (row[i][1] == "green")
-                    shapeColor = ShapeColor.Green;
-                else if (row[i][1] == "blue")
-                    shapeColor = ShapeColor.Blue;
-                else if (row[i][1] == "yellow")
-                    shapeColor = ShapeColor.Yellow;
-                else if (row[i][1] == "purple")
-                    shapeColor = ShapeColor.Purple;
-                else
-                    shapeColor = ShapeColor.BLANK;
+                switch(row[i][0]) {
+                    case "circle": shapeType = Circle; break;
+                    case "square": shapeType = Square; break;
+                    case "triangle": shapeType = Triangle; break;
+                    default: shapeType = Triangle; break;
+                }
+
+                switch(row[i][1]) {
+                    case "red": shapeColor = ShapeColor.Red; break;
+                    case "green": shapeColor = ShapeColor.Green; break;
+                    case "blue": shapeColor = ShapeColor.Blue; break;
+                    case "yellow": shapeColor = ShapeColor.Yellow; break;
+                    case "purple": shapeColor = ShapeColor.Purple; break;
+                    default: shapeColor = ShapeColor.BLANK; break;
+                }
 
 				gameObject1 = Instantiate(shapeType, spawnPoints[i].transform.position, Quaternion.identity) as GameObject;
 				PASColor colorSetter = gameObject1.GetComponent<PASColor>();

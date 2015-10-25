@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public struct Question {
 	public string shape;
@@ -14,7 +15,7 @@ public class QuestionGenerator{
 	private static string[] quantities = {"more","fewer"};
 	private static string[] colors = {"blue","red","green","purple","yellow"};
 	private static string[] shapes = {"circle","square","triangle"};
-	public int[] thresholds = {5,12,22,35,55}; // Artificial thresholds to add in shapes/colors/adjust ratio
+	public int[] thresholds = {5,12,22,35}; // Artificial thresholds to add in shapes/colors/adjust ratio
 	public int shapeThreshold = 10; // The threshold at which questions will start asking different shape types 
     
 	// Returns the question and the win parameters, given some number of function parameters based on the difficulty.
@@ -33,16 +34,16 @@ public class QuestionGenerator{
 
         // If we have passed the shape level threshold, then discriminate shapes for the question - else, only colors.
         if (level > shapeThreshold)
-            return new Question { shape = randomShape, color = randomColor, quantity = randomQuantity, leftObjectRatios = leftRatios, objects = shapeObjects };
+            return new Question { shape = randomShape, color = randomColor, quantity = randomQuantity, leftObjectRatios = leftRatios, rightObjectRatios = rightRatios, objects = shapeObjects };
         else
-            return new Question { shape = null, color = randomColor, quantity = randomQuantity, rightObjectRatios = rightRatios, objects = shapeObjects };
+            return new Question { shape = null, color = randomColor, quantity = randomQuantity, leftObjectRatios = leftRatios, rightObjectRatios = rightRatios, objects = shapeObjects };
     } 
 
 	//Returns an array of size 2 = [number of colors, number of shapes] given the level. Color range of [0,5], shape range of [2,3].
 	private int[] levelParameters(int level) {
 		int[] parameters;
-		if(level < thresholds[0]) {
-			parameters = new int[]{0,2};
+		if(level < shapeThreshold) { //For when we're only asking for shapes, not colors
+			parameters = new int[]{3,3};
 		} else if (level < thresholds[1]) {
 			parameters = new int[]{1,2};
 		} else if(level < thresholds[2]) {
@@ -66,17 +67,19 @@ public class QuestionGenerator{
     // Given the arrays of spawn percentages for each side, fills them according to the bounded percentages.
     private double[][] fillSpawnPercentages(double[] leftSideRatios, double[] rightSideRatios, int level, int objectCount, string quantity) {
         System.Random r = new System.Random();
-        double[] spawnPercentageBounds = findSpawnPercentages(level, objectCount);
         double leftSum = 0, rightSum = 0;
         for(int i = 0; i < objectCount; i++) {
-            if(i == objectCount - 1) {
-                double leftPercentage = r.Next((int)(spawnPercentageBounds[0] * 100), (int)(spawnPercentageBounds[1] * 100)) / 100,
+            if(i != objectCount - 1) {
+                double[] spawnPercentageBounds = findSpawnPercentages(level, objectCount);
+                double leftPercentage = (double)r.Next((int)(spawnPercentageBounds[0] * 100), (int)(spawnPercentageBounds[1] * 100)) / 100,
                     rightPercentage = spawnPercentageBounds[1] - leftPercentage;
+
                 leftSideRatios[i] = leftPercentage;
                 rightSideRatios[i] = rightPercentage;
 
                 leftSum += leftPercentage;
                 rightSum += rightPercentage;
+
             } else {
                 leftSideRatios[i] = 1 - leftSum;
                 rightSideRatios[i] = 1 - rightSum;
@@ -104,10 +107,10 @@ public class QuestionGenerator{
 
         for(int i = 0; i < numColors; i++) {
             for(int j = 0; j < numShapes; j++) {
-                objects[i * j] = new KeyValuePair<string, string>(colors[i], shapes[j]);
+                objects[i * numShapes + j] = new KeyValuePair<string, string>(colors[i], shapes[j]);
             }
         }
-
+        
         return objects;
     }
 }
