@@ -1,12 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-
-// ["shape","color"]
-
-
-// getObjectRow()
-
 
 public class Instantiate : MonoBehaviour {
 	public GameObject Square;
@@ -63,38 +56,33 @@ public class Instantiate : MonoBehaviour {
 
 	}
 
-	string ranShape()
+	string getRandomShape()
 	{
-		int ranNum = Random.Range(0,3);
+		int randomNum = Random.Range(0,3);
 		string shape = "";
 
-		if (ranNum == 0)
-			shape = "circle";
-		if (ranNum == 1)
-			shape = "square";
-		if (ranNum == 2)
-			shape = "triangle";
-
+        switch(randomNum) {
+            case 0: shape = "circle"; break;
+            case 1: shape = "square"; break;
+            case 2: shape = "triangle"; break;
+        }
 
 		return shape;
 
 	}
 
-	string ranColor()
+	string getRandomColor()
 	{
-		int ranNum = Random.Range(0,5);
+		int randomNum = Random.Range(0,5);
 		string color = "";
 		
-		if (ranNum == 0)
-			color = "red";
-		if (ranNum == 1)
-			color = "blue";
-		if (ranNum == 2)
-			color = "green";
-		if (ranNum == 3)
-			color = "yellow";
-		if (ranNum == 4)
-			color = "purple";
+        switch(randomNum) {
+            case 0: color = "red"; break;
+            case 1: color = "blue"; break;
+            case 2: color = "green"; break;
+            case 3: color = "yellow"; break;
+            case 4: color = "purple"; break;
+        }
 
 		return color;
 
@@ -122,7 +110,7 @@ public class Instantiate : MonoBehaviour {
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					row.Add(new string[]{ranShape(),ranColor()});
+					row.Add(new string[]{getRandomShape(),getRandomColor()});
 				}
 
 			}
