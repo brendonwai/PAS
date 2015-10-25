@@ -16,7 +16,7 @@ public class QuestionGenerator{
 	private static string[] colors = {"blue","red","green","purple","yellow"};
 	private static string[] shapes = {"circle","square","triangle"};
 	public int[] thresholds = {5,12,22,35}; // Artificial thresholds to add in shapes/colors/adjust ratio
-	public int shapeThreshold = 10; // The threshold at which questions will start asking different shape types 
+	public int shapeThreshold = 5; // The threshold at which questions will start asking different shape types 
     
 	// Returns the question and the win parameters, given some number of function parameters based on the difficulty.
 	// The returns a question's indexes for a predefined array in the form <question, color, shape, side,ratio>.
@@ -60,8 +60,21 @@ public class QuestionGenerator{
 
     // Given the level and number of objects, returns an array of minimum and maximum percentages.
     // The returned array is of the form {minimum percentage, maximum percentage}.
-    private double[] findSpawnPercentages(int level, int objectCount) {
-        return new double[]{0.15,0.4};
+    // Current algorithm: If the current sum of ratios of any side + current upper bound exceeds 1, we lower the upper bound so the total ratio = 1 at all times.
+    // Take the given difference made in the upper bound and subtract from lower bound - if below 0, lowerBound = 0 to make within legal bounds.
+    // Invariant: 0 <= lowerBound < upperBound <= (upperBound + maxSum) <= 1
+    private double[] findSpawnPercentages(int level, int objectCount, double maxSum) {
+        double lowerBound = 0.15, upperBound = 0.35;
+
+        if (maxSum + upperBound > 1) {
+            double lastUpperBound = upperBound;
+            upperBound = 1 - maxSum;
+            lowerBound = lowerBound - (lastUpperBound - upperBound);
+            if (lowerBound < 0)
+                lowerBound = 0;
+        }
+        
+        return new double[] {lowerBound,upperBound};
     }
 
     // Given the arrays of spawn percentages for each side, fills them according to the bounded percentages.
@@ -70,7 +83,8 @@ public class QuestionGenerator{
         double leftSum = 0, rightSum = 0;
         for(int i = 0; i < objectCount; i++) {
             if(i != objectCount - 1) {
-                double[] spawnPercentageBounds = findSpawnPercentages(level, objectCount);
+                double maxSum = leftSum > rightSum ? leftSum : rightSum;
+                double[] spawnPercentageBounds = findSpawnPercentages(level, objectCount, maxSum);
                 double leftPercentage = (double)r.Next((int)(spawnPercentageBounds[0] * 100), (int)(spawnPercentageBounds[1] * 100)) / 100,
                     rightPercentage = spawnPercentageBounds[1] - leftPercentage;
 

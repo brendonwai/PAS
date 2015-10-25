@@ -119,12 +119,10 @@ public class Instantiate : MonoBehaviour {
 				{
 					row.Add(new string[]{ranShape(),ranColor()});
 				}
-
 			}
 
             for (int i = 0; i < 8; i++)
 			{
-
 				GameObject shapeType = null;
 				ShapeColor shapeColor = ShapeColor.BLANK;
 

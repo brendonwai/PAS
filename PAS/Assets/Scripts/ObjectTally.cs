@@ -110,10 +110,10 @@ public class ObjectTally : MonoBehaviour {
 	void fillObjectPools(KeyValuePair<string, string>[] objects, double[] leftRatios, double[] rightRatios, int sideCount) {
         for(int i = 0; i < objects.Length; i++) {
             for (int leftIndex = 0; leftIndex < leftRatios[i] * sideCount; leftIndex++)
-                LeftPool.Add(new string[] {objects[i].Key,objects[i].Value});
+                LeftPool.Add(new string[] {objects[i].Value,objects[i].Key});
 
             for(int rightIndex = 0; rightIndex < rightRatios[i]* sideCount; rightIndex++)
-                RightPool.Add(new string[] { objects[i].Key, objects[i].Value });
+                RightPool.Add(new string[] { objects[i].Value, objects[i].Key});
         }
 	}
 }
