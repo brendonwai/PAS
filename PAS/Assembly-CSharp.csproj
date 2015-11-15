@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BlocksTooHigh.cs" />
+     <Compile Include="Assets\Scripts\CardInit.cs" />
      <Compile Include="Assets\Scripts\DeleteShape.cs" />
      <Compile Include="Assets\Scripts\DisableButton.cs" />
      <Compile Include="Assets\Scripts\Instantiate.cs" />
