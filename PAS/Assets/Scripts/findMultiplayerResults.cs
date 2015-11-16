@@ -13,9 +13,16 @@ public class findMultiplayerResults : MonoBehaviour {
 		persistentGameObject = GameObject.Find("multiplayerResults");
 
 		multiplayerResults mp = persistentGameObject.GetComponent<multiplayerResults>();
+
 		
 		Debug.Log (mp.winner);
 
+        if (string.Compare(mp.winner, "Game Over")==0)
+        {
+            mp.winner = "Player";
+        }
+        else
+            Debug.Log("WTF");
 		UItext.GetComponent<Text>().text = mp.winner;
 
 	}

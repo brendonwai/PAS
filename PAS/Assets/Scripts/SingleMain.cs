@@ -30,8 +30,9 @@ public class SingleMain : MonoBehaviour {
 	int starLevel = 3;
 	Play sound;
 	multiplayerResults result;
-	
-	public GameObject starSpawner, explosionSpawner;
+    singleplayerResults scoreResult;
+
+    public GameObject starSpawner, explosionSpawner;
 	ShootingStar shootingStar;
 	//Explosion explosion;
 	bool starSpawned;
@@ -47,7 +48,8 @@ public class SingleMain : MonoBehaviour {
         lightFlash = directionalLight.GetComponent<LightFlash>();
 
 		result = GameObject.Find ("multiplayerResults").GetComponent<multiplayerResults> ();
-		sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
+        scoreResult = GameObject.Find("singleplayerResults").GetComponent<singleplayerResults> ();
+        sound = GameObject.Find ("SoundPlayer").GetComponent<Play>();
 		generator = GameObject.Find ("Generators").GetComponent<Instantiate>();
 		LB = GameObject.Find ("LeftButton").GetComponent <DisableButton> ();
 		RB = GameObject.Find ("RightButton").GetComponent <DisableButton> ();
@@ -269,7 +271,8 @@ public class SingleMain : MonoBehaviour {
 		}
 	}
 	void GameOver(){
-		result.setWinner ("Game Over \nScore: " + lvl.getScore());
+		result.setWinner ("Game Over");
+        scoreResult.setWinner("" + lvl.getScore());
 		Application.LoadLevel ("GameOver");
 	}
 
