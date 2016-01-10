@@ -61,6 +61,8 @@ public class SingleMain : MonoBehaviour {
 		livestext = GameObject.Find ("LivesText").GetComponent<Text> ();
 		shootingStar = starSpawner.GetComponent<ShootingStar> ();
 
+        shootingStar.singleMain = this;
+
 		//initializes lives, levels and timer
 		time = timersc.count;
 		level = 1;
