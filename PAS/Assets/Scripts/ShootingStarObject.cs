@@ -56,8 +56,6 @@ public class ShootingStarObject : MonoBehaviour
     {
         if (starFactory.debugMode) Debug.Log("I've been clicked! ;O");
 
-
-
         starFactory.destroyStar();
     }
 }

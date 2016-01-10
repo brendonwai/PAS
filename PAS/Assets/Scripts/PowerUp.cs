@@ -17,8 +17,6 @@ public class PowerUp : MonoBehaviour {
     {
         int ranNum = Random.Range(0, 3);
 
-        Debug.Log(ranNum);
-
         switch (ranNum)
         {
             case 0:

@@ -35,7 +35,6 @@ public class ShootingStar : MonoBehaviour
     public void starFactory(int level)
     {
         cloneStar = Instantiate(shootingStar, new Vector3(-15, (float)(r.NextDouble() * 5 - 5), 0), Quaternion.identity) as GameObject;
-        Debug.Log(cloneStar.transform);
         starAlive = true;
         cloneStar.GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "star";
         cloneStar.GetComponent<ShootingStarObject>().setStarFactory(this);
